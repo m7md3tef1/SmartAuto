@@ -1,0 +1,13 @@
+String? token = '';
+String? id = '';
+var roomId = '';
+bool? isLogin = false;
+String? email1 = '';
+int? price;
+const taskId = 'id';
+const taskReview = 'review';
+const taskTitle = 'title';
+const taskImportance = 'importance';
+const taskPrice = 'price';
+const taskDesc = 'desc';
+const taskStatus = 'status';
