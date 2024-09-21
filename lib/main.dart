@@ -40,13 +40,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SessionTimeOutListener(
-      duration: const Duration(minutes: 1),
+      duration: const Duration(minutes: 10000000),
       onTimeOut: () {
         SystemNavigator.pop();
       },
       child: MultiBlocProvider(
         providers: [
-          BlocProvider(create: (_) => HomeCubit()..getPlate()),
+          BlocProvider(create: (_) => HomeCubit()..getListPlateEN()),
           BlocProvider(create: (_) => SmartAutoLoginCubit()),
         ],
         child: ScreenUtilInit(

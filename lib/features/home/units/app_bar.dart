@@ -42,15 +42,15 @@ class AppBarHome extends StatelessWidget {
   }
 }
 
-var getPlates;
+//
+// var getPlate = ;
 customDialogShowUsers(context, text) {
-  getPlates = null;
-  getPlates = '';
-
   showDialog(
       useRootNavigator: false,
       context: context,
       builder: (dialogContext) {
+        // getPlate = null;
+        // getPlate = '';
         return SizedBox(
           height: 500.h,
           width: 1.sw,
@@ -116,23 +116,23 @@ customDialogShowUsers(context, text) {
                                 children: [
                                   CustomText(
                                       text: text == 'رقم اللوحة: '.tr()
-                                          ? "وصف السيارة".tr()
+                                          ? "رقم اللوحة".tr()
                                           : 'كود الموظف'.tr(),
                                       fontWeight: FontWeight.bold,
                                       fontSize: ScreenUtil().orientation ==
                                               Orientation.landscape
                                           ? 8.sp
-                                          : 16.sp,
+                                          : 13.sp,
                                       color: Colors.black),
                                   CustomText(
                                       text: text == 'رقم اللوحة: '.tr()
-                                          ? "قراءة العداد السابقة".tr()
+                                          ? "الوصف".tr()
                                           : 'اسم الموظف'.tr(),
                                       fontWeight: FontWeight.bold,
                                       fontSize: ScreenUtil().orientation ==
                                               Orientation.landscape
                                           ? 8.sp
-                                          : 16.sp,
+                                          : 13.sp,
                                       color: Colors.black),
                                   text == 'رقم اللوحة: '.tr()
                                       ? const SizedBox()
@@ -142,7 +142,7 @@ customDialogShowUsers(context, text) {
                                           fontSize: ScreenUtil().orientation ==
                                                   Orientation.landscape
                                               ? 8.sp
-                                              : 16.sp,
+                                              : 13.sp,
                                           color: Colors.black)
                                 ],
                               ),
@@ -156,18 +156,37 @@ customDialogShowUsers(context, text) {
                               padding: EdgeInsets.zero,
                               itemCount:
                                   // text == 'رقم اللوحة: '.tr()
-                                  // ? HomeCubit.get(context).getPlates.length:
-                                  3,
+                                  // ? HomeCubit.get(context).getPlate.length:
+                                  text == 'رقم اللوحة: '.tr()
+                                      ? HomeCubit.get(context)
+                                          .GetListPlateEN!
+                                          .length
+                                      : 3,
                               scrollDirection: Axis.vertical,
                               physics: const BouncingScrollPhysics(),
                               itemBuilder: (context, index) {
                                 return InkWell(
                                   onTap: () {
                                     // text == 'رقم اللوحة: '.tr()
-                                    //     ? (getPlates =
-                                    //         HomeCubit.get(context).getPlates)
+                                    //     ? (getPlate =
+                                    //         HomeCubit.get(context).getPlate)
                                     //     :
-                                    '';
+                                    text == 'رقم اللوحة: '.tr()
+                                        ? {
+                                            setState(() {
+                                              HomeCubit.get(context)
+                                                      .getPlates ==
+                                                  HomeCubit.get(context)
+                                                      .GetListPlateEN[index];
+                                              HomeCubit.get(context).getPlates =
+                                                  HomeCubit.get(context)
+                                                      .GetListPlateEN[index];
+                                              print(HomeCubit.get(context)
+                                                  .getPlates);
+                                              MagicRouter.pop();
+                                            }),
+                                          }
+                                        : '';
                                   },
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.only(
@@ -177,44 +196,42 @@ customDialogShowUsers(context, text) {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         CustomText(
-                                            text:
-                                                // text == 'رقم اللوحة: '.tr()
-                                                //     ? HomeCubit.get(context)
-                                                //             .getPlates[index]
-                                                //         ['fa_DSC_Ar'] :
-                                                '123',
-                                            fontWeight: FontWeight.bold,
+                                            text: text == 'رقم اللوحة: '.tr()
+                                                ? HomeCubit.get(context)
+                                                        .GetListPlateEN[index]
+                                                    ['Plate_No']
+                                                : '123',
+                                            fontWeight: FontWeight.w600,
                                             fontSize:
                                                 ScreenUtil().orientation ==
                                                         Orientation.landscape
                                                     ? 6.sp
-                                                    : 14.sp,
+                                                    : 13.sp,
                                             color: Colors.black),
                                         CustomText(
-                                            text:
-                                                // text == 'رقم اللوحة: '.tr()
-                                                //     ? HomeCubit.get(context)
-                                                //         .getPlates[index]
-                                                //             ['cuntr_no']
-                                                //         .toString() :
-                                                'محمد عاطف',
-                                            fontWeight: FontWeight.bold,
+                                            text: text == 'رقم اللوحة: '.tr()
+                                                ? HomeCubit.get(context)
+                                                    .GetListPlateEN[index]
+                                                        ['fa_DSC_En']
+                                                    .toString()
+                                                : 'محمد عاطف',
+                                            fontWeight: FontWeight.w600,
                                             fontSize:
                                                 ScreenUtil().orientation ==
                                                         Orientation.landscape
                                                     ? 6.sp
-                                                    : 14.sp,
+                                                    : 13.sp,
                                             color: Colors.black),
                                         text == 'رقم اللوحة: '.tr()
                                             ? const SizedBox()
                                             : CustomText(
                                                 text: '01021424949',
-                                                fontWeight: FontWeight.bold,
+                                                fontWeight: FontWeight.w600,
                                                 fontSize: ScreenUtil()
                                                             .orientation ==
                                                         Orientation.landscape
                                                     ? 6.sp
-                                                    : 14.sp,
+                                                    : 13.sp,
                                                 color: Colors.black)
                                       ],
                                     ),
