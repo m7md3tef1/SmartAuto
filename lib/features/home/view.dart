@@ -28,8 +28,9 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   @override
   void initState() {
-    HomeCubit.get(context).getListPlateEN();
-    HomeCubit.get(context).getListCostAR();
+    HomeCubit.get(context).getListPlate();
+    HomeCubit.get(context).getListCost();
+    HomeCubit.get(context).getListPlace();
     super.initState();
   }
 

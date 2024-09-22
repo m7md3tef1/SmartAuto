@@ -159,7 +159,7 @@ customDialogShowUsers(context, text) {
                                   // ? HomeCubit.get(context).getPlate.length:
                                   text == 'رقم اللوحة: '.tr()
                                       ? HomeCubit.get(context)
-                                          .GetListPlateEN!
+                                          .GetListPlate!
                                           .length
                                       : 3,
                               scrollDirection: Axis.vertical,
@@ -173,10 +173,10 @@ customDialogShowUsers(context, text) {
                                               HomeCubit.get(context)
                                                       .getPlates ==
                                                   HomeCubit.get(context)
-                                                      .GetListPlateEN[index];
+                                                      .GetListPlate[index];
                                               HomeCubit.get(context).getPlates =
                                                   HomeCubit.get(context)
-                                                      .GetListPlateEN[index];
+                                                      .GetListPlate[index];
                                               print(HomeCubit.get(context)
                                                   .getPlates);
                                               MagicRouter.pop();
@@ -194,7 +194,7 @@ customDialogShowUsers(context, text) {
                                         CustomText(
                                             text: text == 'رقم اللوحة: '.tr()
                                                 ? HomeCubit.get(context)
-                                                        .GetListPlateEN[index]
+                                                        .GetListPlate[index]
                                                     ['Plate_No']
                                                 : '123',
                                             fontWeight: FontWeight.w600,
@@ -207,7 +207,7 @@ customDialogShowUsers(context, text) {
                                         CustomText(
                                             text: text == 'رقم اللوحة: '.tr()
                                                 ? HomeCubit.get(context)
-                                                    .GetListPlateEN[index]
+                                                    .GetListPlate[index]
                                                         ['fa_DSC_En']
                                                     .toString()
                                                 : 'محمد عاطف',

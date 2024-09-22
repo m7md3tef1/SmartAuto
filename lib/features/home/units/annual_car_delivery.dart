@@ -12,6 +12,8 @@ class AnnualDeliveringCar extends StatefulWidget {
 
 class _AnnualDeliveringCarState extends State<AnnualDeliveringCar> {
   var plate;
+  var place1;
+  var place2;
   var date;
   var date1;
   var date2;
@@ -584,6 +586,16 @@ class _AnnualDeliveringCarState extends State<AnnualDeliveringCar> {
                                 ? (cost2 == null
                                 ? ''
                                 : cost2['CST_No'])
+                                :
+                            text == 'من مكان: '.tr()
+                                ? (place1 == null
+                                ? ''
+                                : place1['Sub_Code'])
+                                :
+                            text == 'الى مكان: '.tr()
+                                ? (place2 == null
+                                ? ''
+                                : place2['Sub_Code'])
                                 : ''}',
                             hintStyle: const TextStyle(
                                 color: Colors.black,
@@ -635,7 +647,7 @@ class _AnnualDeliveringCarState extends State<AnnualDeliveringCar> {
                                     title: Row(
                                        mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
-                                        Spacer(),
+                                        const Spacer(),
                                         Row(
                                           mainAxisAlignment: MainAxisAlignment.center,
                                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -643,6 +655,8 @@ class _AnnualDeliveringCarState extends State<AnnualDeliveringCar> {
                                             CustomText(
                                                 text: text == 'رقم اللوحة: '.tr()?
                                                 'نافذه استعلاميه عن اللوحات'.tr():
+                                                text=='من مكان: '.tr()||text== 'الى مكان: '.tr()?
+                                                    "الأماكن".tr():
                                                 text == 'من مركز التلكفة: '.tr()|| text == 'الى مركز التلكفة: '.tr()?
                                                 'نافذه استعلاميه عن مراكز التلكفة'.tr():
                                                 'نافذه استعلاميه عن الموظفين'.tr(),
@@ -654,7 +668,7 @@ class _AnnualDeliveringCarState extends State<AnnualDeliveringCar> {
                                                 color: Colors.black),
                                           ],
                                         ),
-                                        Spacer(),
+                                        const Spacer(),
                                         Row(
                                           mainAxisAlignment: MainAxisAlignment.end,
                                           crossAxisAlignment: CrossAxisAlignment.end,
@@ -698,7 +712,7 @@ class _AnnualDeliveringCarState extends State<AnnualDeliveringCar> {
                                                           text: text == 'رقم اللوحة: '.tr()
                                                               ? "رقم اللوحة".tr()
                                                               :
-                                                          text == 'الى مركز التلكفة: '.tr()||text== 'من مركز التلكفة: '.tr()
+                                                          text == 'الى مركز التلكفة: '.tr()||text== 'من مركز التلكفة: '.tr()||text=='من مكان: '.tr()||text== 'الى مكان: '.tr()
                                                               ? "الكود".tr()
                                                               : 'كود الموظف'.tr(),
                                                           fontWeight: FontWeight.bold,
@@ -709,7 +723,9 @@ class _AnnualDeliveringCarState extends State<AnnualDeliveringCar> {
                                                           color: Colors.black),
                                                       CustomText(
                                                           text: text == 'رقم اللوحة: '.tr() || text == 'الى مركز التلكفة: '.tr()||text== 'من مركز التلكفة: '.tr()
-                                                              ? "الوصف".tr()
+                                                              ? "الوصف".tr():
+                                                          text=='من مكان: '.tr()||text== 'الى مكان: '.tr()?
+                                                              'الإسم'.tr()
                                                               : 'اسم الموظف'.tr(),
                                                           fontWeight: FontWeight.bold,
                                                           fontSize: ScreenUtil().orientation ==
@@ -717,7 +733,7 @@ class _AnnualDeliveringCarState extends State<AnnualDeliveringCar> {
                                                               ? 8.sp
                                                               : 13.sp,
                                                           color: Colors.black),
-                                                      text == 'رقم اللوحة: '.tr()|| text == 'الى مركز التلكفة: '.tr()||text== 'من مركز التلكفة: '.tr()
+                                                      text=='من مكان: '.tr()||text== 'الى مكان: '.tr()||   text == 'رقم اللوحة: '.tr()|| text == 'الى مركز التلكفة: '.tr()||text== 'من مركز التلكفة: '.tr()
                                                           ? const SizedBox()
                                                           : CustomText(
                                                           text: 'رقم التليفون'.tr(),
@@ -735,9 +751,11 @@ class _AnnualDeliveringCarState extends State<AnnualDeliveringCar> {
                                             Expanded(
                                               child: SingleChildScrollView(
                                                 child:
-                                                text == 'رقم اللوحة: '.tr() &&HomeCubit.get(context).GetListPlateEN==null
+                                                text == 'رقم اللوحة: '.tr() &&HomeCubit.get(context).GetListPlate==null
                                                     ?const SizedBox():
-                                                (text == 'الى مركز التلكفة: '.tr()||text== 'من مركز التلكفة: '.tr()) && HomeCubit.get(context).GetListCostAR==null
+                                                ( text=='من مكان: '.tr()||text== 'الى مكان: '.tr()) &&HomeCubit.get(context).GetListPlace==null
+                                                    ?const SizedBox():
+                                                (text == 'الى مركز التلكفة: '.tr()||text== 'من مركز التلكفة: '.tr()) && HomeCubit.get(context).GetListCost==null
                                                     ?const SizedBox():
 
                                                 ListView.builder(
@@ -746,12 +764,17 @@ class _AnnualDeliveringCarState extends State<AnnualDeliveringCar> {
                                                   itemCount:
                                                   text == 'رقم اللوحة: '.tr()
                                                       ? HomeCubit.get(context)
-                                                      .GetListPlateEN!
+                                                      .GetListPlate!
+                                                      .length
+                                                      :
+                                                  text=='من مكان: '.tr()||text== 'الى مكان: '.tr()
+                                                      ? HomeCubit.get(context)
+                                                      .GetListPlace!
                                                       .length
                                                       :
                                                   text == 'الى مركز التلكفة: '.tr()||text== 'من مركز التلكفة: '.tr()
                                                       ? HomeCubit.get(context)
-                                                      .GetListCostAR!
+                                                      .GetListCost!
                                                       .length
                                                       : 3,
                                                   scrollDirection: Axis.vertical,
@@ -764,10 +787,34 @@ class _AnnualDeliveringCarState extends State<AnnualDeliveringCar> {
                                                           setState(() {
                                                             plate ==
                                                                 HomeCubit.get(context)
-                                                                    .GetListPlateEN[index];
+                                                                    .GetListPlate[index];
                                                             plate =
                                                             HomeCubit.get(context)
-                                                                .GetListPlateEN[index];
+                                                                .GetListPlate[index];
+                                                            MagicRouter.pop();
+                                                          }),
+                                                        }:
+                                                        text=='من مكان: '.tr()
+                                                            ? {
+                                                          setState(() {
+                                                            place1 ==
+                                                                HomeCubit.get(context)
+                                                                    .GetListPlace[index];
+                                                            place1 =
+                                                            HomeCubit.get(context)
+                                                                .GetListPlace[index];
+                                                            MagicRouter.pop();
+                                                          }),
+                                                        }:
+                                                        text== 'الى مكان: '.tr()
+                                                            ? {
+                                                          setState(() {
+                                                            place2 ==
+                                                                HomeCubit.get(context)
+                                                                    .GetListPlace[index];
+                                                            place2 =
+                                                            HomeCubit.get(context)
+                                                                .GetListPlace[index];
                                                             MagicRouter.pop();
                                                           }),
                                                         }: text == 'الى مركز التلكفة: '.tr()
@@ -775,10 +822,10 @@ class _AnnualDeliveringCarState extends State<AnnualDeliveringCar> {
                                                           setState(() {
                                                             cost2 ==
                                                                 HomeCubit.get(context)
-                                                                    .GetListCostAR[index];
+                                                                    .GetListCost[index];
                                                             cost2 =
                                                             HomeCubit.get(context)
-                                                                .GetListCostAR[index];
+                                                                .GetListCost[index];
                                                             MagicRouter.pop();
                                                           }),
                                                         }
@@ -787,10 +834,10 @@ class _AnnualDeliveringCarState extends State<AnnualDeliveringCar> {
                                                           setState(() {
                                                             cost1 ==
                                                                 HomeCubit.get(context)
-                                                                    .GetListCostAR[index];
+                                                                    .GetListCost[index];
                                                             cost1 =
                                                             HomeCubit.get(context)
-                                                                .GetListCostAR[index];
+                                                                .GetListCost[index];
                                                             MagicRouter.pop();
                                                           }),
                                                         }
@@ -806,13 +853,18 @@ class _AnnualDeliveringCarState extends State<AnnualDeliveringCar> {
                                                             CustomText(
                                                                 text: text == 'رقم اللوحة: '.tr()
                                                                     ? HomeCubit.get(context)
-                                                                    .GetListPlateEN[index]
+                                                                    .GetListPlate[index]
                                                                 ['Plate_No']
                                                                     :
                                                                 text == 'الى مركز التلكفة: '.tr()||text== 'من مركز التلكفة: '.tr()
                                                                     ? HomeCubit.get(context)
-                                                                    .GetListCostAR[index]
+                                                                    .GetListCost[index]
                                                                 ['CST_No']
+                                                                    :
+                                                                text=='من مكان: '.tr()||text== 'الى مكان: '.tr()
+                                                                    ? HomeCubit.get(context)
+                                                                    .GetListPlace[index]
+                                                                ['Sub_Code'].toString()
                                                                     : '123',
                                                                 fontWeight: FontWeight.w600,
                                                                 fontSize:
@@ -824,14 +876,29 @@ class _AnnualDeliveringCarState extends State<AnnualDeliveringCar> {
                                                             CustomText(
                                                                 text: text == 'رقم اللوحة: '.tr()
                                                                     ? HomeCubit.get(context)
-                                                                    .GetListPlateEN[index]
+                                                                    .GetListPlate[index]
                                                                 ['fa_DSC_En']
                                                                     .toString()
                                                                     :
                                                                 text == 'الى مركز التلكفة: '.tr()||text== 'من مركز التلكفة: '.tr()
-                                                                    ? HomeCubit.get(context)
-                                                                    .GetListCostAR[index]
-                                                                ['CST_NM_AR']
+                                                                    ? (EasyLocalization.of(navigatorKey.currentContext!)!
+                                                                    .currentLocale ==
+                                                                    const Locale('ar', '')
+                                                                    ?HomeCubit.get(context)
+                                                                    .GetListCost[index]
+                                                                ['CST_NM_AR']:HomeCubit.get(context)
+                                                                    .GetListCost[index]
+                                                                ['CST_NM_EN'])
+                                                                    :
+                                                                text=='من مكان: '.tr()||text== 'الى مكان: '.tr()
+                                                                    ? (EasyLocalization.of(navigatorKey.currentContext!)!
+                                                                    .currentLocale ==
+                                                                    const Locale('ar', '')
+                                                                    ?HomeCubit.get(context)
+                                                                    .GetListPlace[index]
+                                                                ['Name_AR']:HomeCubit.get(context)
+                                                                    .GetListPlace[index]
+                                                                ['Name_EN'])
                                                                     :
                                                                 'محمد عاطف',
                                                                 fontWeight: FontWeight.w600,
@@ -841,7 +908,7 @@ class _AnnualDeliveringCarState extends State<AnnualDeliveringCar> {
                                                                     ? 6.sp
                                                                     : 13.sp,
                                                                 color: Colors.black),
-                                                            text == 'رقم اللوحة: '.tr()||text == 'الى مركز التلكفة: '.tr()||text== 'من مركز التلكفة: '.tr()
+                                                            text=='من مكان: '.tr()||text== 'الى مكان: '.tr()||    text == 'رقم اللوحة: '.tr()||text == 'الى مركز التلكفة: '.tr()||text== 'من مركز التلكفة: '.tr()
                                                                 ? const SizedBox()
                                                                 : CustomText(
                                                                 text: '01021424949',
@@ -909,12 +976,34 @@ class _AnnualDeliveringCarState extends State<AnnualDeliveringCar> {
                             : text == 'من مركز التلكفة: '.tr()
                             ? (cost1 == null
                             ? ''
-                            : cost1['CST_NM_AR'])
+                            : ( EasyLocalization.of(navigatorKey.currentContext!)!
+                            .currentLocale ==
+                            const Locale('ar', '')
+                            ?cost1['CST_NM_AR']:cost1['CST_NM_EN']))
                             :
                         text == 'الى مركز التلكفة: '.tr()
                             ? (cost2 == null
                             ? ''
-                            : cost2['CST_NM_AR'])
+                            : ( EasyLocalization.of(navigatorKey.currentContext!)!
+                            .currentLocale ==
+                            const Locale('ar', '')
+                            ?cost2['CST_NM_AR']:cost2['CST_NM_EN']))
+                            :
+                        text == 'من مكان: '.tr()
+                            ? (place1 == null
+                            ? ''
+                            : ( EasyLocalization.of(navigatorKey.currentContext!)!
+                            .currentLocale ==
+                            const Locale('ar', '')
+                            ?place1['Name_AR']:place1['Name_EN']))
+                            :
+                        text == 'الى مكان: '.tr()
+                            ? (place2 == null
+                            ? ''
+                            : ( EasyLocalization.of(navigatorKey.currentContext!)!
+                            .currentLocale ==
+                            const Locale('ar', '')
+                            ?place2['Name_AR']:place2['Name_EN']))
                             : ''}',
                         hintStyle: const TextStyle(
                             color: Colors.black,
@@ -1057,7 +1146,7 @@ class _AnnualDeliveringCarState extends State<AnnualDeliveringCar> {
                                 title: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Spacer(),
+                                    const Spacer(),
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -1076,7 +1165,7 @@ class _AnnualDeliveringCarState extends State<AnnualDeliveringCar> {
                                             color: Colors.black),
                                       ],
                                     ),
-                                    Spacer(),
+                                    const Spacer(),
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       crossAxisAlignment: CrossAxisAlignment.end,
@@ -1157,9 +1246,9 @@ class _AnnualDeliveringCarState extends State<AnnualDeliveringCar> {
                                         Expanded(
                                           child: SingleChildScrollView(
                                             child:
-                                            text == 'رقم اللوحة: '.tr() &&HomeCubit.get(context).GetListPlateEN==null
+                                            text == 'رقم اللوحة: '.tr() &&HomeCubit.get(context).GetListPlate==null
                                                 ?const SizedBox():
-                                            (text == 'الى مركز التلكفة: '.tr()||text== 'من مركز التلكفة: '.tr()) && HomeCubit.get(context).GetListCostAR==null
+                                            (text == 'الى مركز التلكفة: '.tr()||text== 'من مركز التلكفة: '.tr()) && HomeCubit.get(context).GetListCost==null
                                                 ?const SizedBox():
 
                                             ListView.builder(
@@ -1168,12 +1257,12 @@ class _AnnualDeliveringCarState extends State<AnnualDeliveringCar> {
                                               itemCount:
                                               text == 'رقم اللوحة: '.tr()
                                                   ? HomeCubit.get(context)
-                                                  .GetListPlateEN!
+                                                  .GetListPlate!
                                                   .length
                                                   :
                                               text == 'الى مركز التلكفة: '.tr()||text== 'من مركز التلكفة: '.tr()
                                                   ? HomeCubit.get(context)
-                                                  .GetListCostAR!
+                                                  .GetListCost!
                                                   .length
                                                   : 3,
                                               scrollDirection: Axis.vertical,
@@ -1186,10 +1275,10 @@ class _AnnualDeliveringCarState extends State<AnnualDeliveringCar> {
                                                       setState(() {
                                                         plate ==
                                                             HomeCubit.get(context)
-                                                                .GetListPlateEN[index];
+                                                                .GetListPlate[index];
                                                         plate =
                                                         HomeCubit.get(context)
-                                                            .GetListPlateEN[index];
+                                                            .GetListPlate[index];
                                                         MagicRouter.pop();
                                                       }),
                                                     }: text == 'الى مركز التلكفة: '.tr()
@@ -1197,10 +1286,10 @@ class _AnnualDeliveringCarState extends State<AnnualDeliveringCar> {
                                                       setState(() {
                                                         cost2 ==
                                                             HomeCubit.get(context)
-                                                                .GetListCostAR[index];
+                                                                .GetListCost[index];
                                                         cost2 =
                                                         HomeCubit.get(context)
-                                                            .GetListCostAR[index];
+                                                            .GetListCost[index];
                                                         MagicRouter.pop();
                                                       }),
                                                     }
@@ -1209,10 +1298,10 @@ class _AnnualDeliveringCarState extends State<AnnualDeliveringCar> {
                                                       setState(() {
                                                         cost1 ==
                                                             HomeCubit.get(context)
-                                                                .GetListCostAR[index];
+                                                                .GetListCost[index];
                                                         cost1 =
                                                         HomeCubit.get(context)
-                                                            .GetListCostAR[index];
+                                                            .GetListCost[index];
                                                         MagicRouter.pop();
                                                       }),
                                                     }
@@ -1228,12 +1317,12 @@ class _AnnualDeliveringCarState extends State<AnnualDeliveringCar> {
                                                         CustomText(
                                                             text: text == 'رقم اللوحة: '.tr()
                                                                 ? HomeCubit.get(context)
-                                                                .GetListPlateEN[index]
+                                                                .GetListPlate[index]
                                                             ['Plate_No']
                                                                 :
                                                             text == 'الى مركز التلكفة: '.tr()||text== 'من مركز التلكفة: '.tr()
                                                                 ? HomeCubit.get(context)
-                                                                .GetListCostAR[index]
+                                                                .GetListCost[index]
                                                             ['CST_No']
                                                                 : '123',
                                                             fontWeight: FontWeight.w600,
@@ -1246,13 +1335,13 @@ class _AnnualDeliveringCarState extends State<AnnualDeliveringCar> {
                                                         CustomText(
                                                             text: text == 'رقم اللوحة: '.tr()
                                                                 ? HomeCubit.get(context)
-                                                                .GetListPlateEN[index]
+                                                                .GetListPlate[index]
                                                             ['fa_DSC_En']
                                                                 .toString()
                                                                 :
                                                             text == 'الى مركز التلكفة: '.tr()||text== 'من مركز التلكفة: '.tr()
                                                                 ? HomeCubit.get(context)
-                                                                .GetListCostAR[index]
+                                                                .GetListCost[index]
                                                             ['CST_NM_AR']
                                                                 :
                                                             'محمد عاطف',
@@ -1397,21 +1486,36 @@ class _AnnualDeliveringCarState extends State<AnnualDeliveringCar> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Expanded(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.yellow,
-                                borderRadius:
-                                    BorderRadiusDirectional.circular(20.r),
-                              ),
-                              child: Center(
-                                child: Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 10.h, horizontal: 12.w),
-                                  child: CustomText(
-                                      text: 'تفريغ البيانات'.tr(),
-                                      fontSize: 18.sp,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold),
+                            child: InkWell(
+                              onTap: (){
+                                setState(() {
+                                  plate=null;
+                                  place1=null;
+                                  place2=null;
+                                  date=null;
+                                  date1=null;
+                                  date2=null;
+                                  time=null;
+                                  cost1=null;
+                                  cost2=null;
+                                });
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.yellow,
+                                  borderRadius:
+                                  BorderRadiusDirectional.circular(20.r),
+                                ),
+                                child: Center(
+                                  child: Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 10.h, horizontal: 12.w),
+                                    child: CustomText(
+                                        text: 'تفريغ البيانات'.tr(),
+                                        fontSize: 18.sp,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold),
+                                  ),
                                 ),
                               ),
                             ),

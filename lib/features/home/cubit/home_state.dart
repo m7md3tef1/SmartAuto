@@ -21,3 +21,10 @@ class GetContractLoading extends HomeState {}
 class GetContractSuccess extends HomeState {}
 
 class GetContractFailed extends HomeState {}
+
+//get_place
+class GetPlaceLoading extends HomeState {}
+
+class GetPlaceSuccess extends HomeState {}
+
+class GetPlaceFailed extends HomeState {}
