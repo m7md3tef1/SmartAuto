@@ -12,6 +12,7 @@ class DailyDeliveringCar extends StatefulWidget {
 }
 
 class _DailyDeliveringCarState extends State<DailyDeliveringCar> {
+
   var plate;
   var place1;
   var place2;
@@ -22,7 +23,7 @@ class _DailyDeliveringCarState extends State<DailyDeliveringCar> {
   var cost1;
   var cost2;
 
-  customRow1(text, hint, isSearch, context) {
+  customRow1(text, hint, isSearch, context){
     return Padding(
         padding: const EdgeInsets.only(top: 2.0, bottom: 2, left: 8, right: 8),
         child:
@@ -1077,7 +1078,7 @@ class _DailyDeliveringCarState extends State<DailyDeliveringCar> {
                   child: SizedBox(
                     width: 150.w,
                     child: TextFormField(
-                      enabled:text=='تاريخ الاسترجاع المتوقع: '.tr()||text=='تاريخ الحركة: '.tr()? false:true,
+                      enabled:text=='تاريخ الاسترجاع المتوقع: '.tr()||text=='تاريخ الحركة: '.tr()||text=='رقم الحركة: '.tr()? false:true,
                       decoration: InputDecoration(
                           errorStyle: TextStyle(
                               fontFamily: 'tj',
@@ -1089,8 +1090,8 @@ class _DailyDeliveringCarState extends State<DailyDeliveringCar> {
                           contentPadding: const EdgeInsets.fromLTRB(
                               0.0, 12.0, 0.0, 0.0),
                           hintText:
-                          ' ${text=='تاريخ الاسترجاع المتوقع: '.tr()?
-                          (date1??''):text=='تاريخ الحركة: '.tr()?(date2??''):''}',
+                          ' ${
+                              text=='رقم الحركة: '.tr()? (HomeCubit.get(context).GetMaxKey??''):text=='تاريخ الاسترجاع المتوقع: '.tr()? (date1??''):text=='تاريخ الحركة: '.tr()?(date2??''):''}',
                           hintStyle: const TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.w700),

@@ -13,6 +13,7 @@ class AnnualPickupCar extends StatefulWidget {
 }
 
 class _AnnualPickupCarState extends State<AnnualPickupCar> {
+
   var plate;
   var place1;
   var place2;
@@ -1078,7 +1079,7 @@ class _AnnualPickupCarState extends State<AnnualPickupCar> {
                   child: SizedBox(
                     width: 150.w,
                     child: TextFormField(
-                      enabled:text=='تاريخ الاسترجاع المتوقع: '.tr()||text=='تاريخ الحركة: '.tr()? false:true,
+                      enabled:text=='تاريخ الاسترجاع المتوقع: '.tr()||text=='تاريخ الحركة: '.tr()||text=='رقم الحركة: '.tr()? false:true,
                       decoration: InputDecoration(
                           errorStyle: TextStyle(
                               fontFamily: 'tj',
@@ -1090,8 +1091,8 @@ class _AnnualPickupCarState extends State<AnnualPickupCar> {
                           contentPadding: const EdgeInsets.fromLTRB(
                               0.0, 12.0, 0.0, 0.0),
                           hintText:
-                          ' ${text=='تاريخ الاسترجاع المتوقع: '.tr()?
-                          (date1??''):text=='تاريخ الحركة: '.tr()?(date2??''):''}',
+                          ' ${
+                              text=='رقم الحركة: '.tr()? (HomeCubit.get(context).GetMaxKey??''):text=='تاريخ الاسترجاع المتوقع: '.tr()? (date1??''):text=='تاريخ الحركة: '.tr()?(date2??''):''}',
                           hintStyle: const TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.w700),

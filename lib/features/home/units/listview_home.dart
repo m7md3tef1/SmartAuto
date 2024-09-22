@@ -20,16 +20,28 @@ class ListViewHome extends StatelessWidget {
           return InkWell(
             onTap: () {
               index == 0
-                  ? MagicRouter.navigateTo(
-                      AnnualDeliveringCar('تسليم سيارة سنوى'.tr(), 'تسليم سيارة'))
+                  ? {
+                      HomeCubit.get(context).getMaxKey(20),
+                      MagicRouter.navigateTo(AnnualDeliveringCar(
+                          'تسليم سيارة سنوى'.tr(), 'تسليم سيارة'))
+                    }
                   : index == 1
-                      ? MagicRouter.navigateTo(
-                          DailyDeliveringCar('تسليم سيارة يومي'.tr(), 'تسليم سيارة'))
+                      ? {
+                          HomeCubit.get(context).getMaxKey(22),
+                          MagicRouter.navigateTo(DailyDeliveringCar(
+                              'تسليم سيارة يومي'.tr(), 'تسليم سيارة'))
+                        }
                       : index == 2
-                          ? MagicRouter.navigateTo(AnnualPickupCar(
-                              'إستلام سيارة سنوي'.tr(), 'تسليم سيارة'))
-                          : MagicRouter.navigateTo(DailyPickupCar(
-                              'إستلام سيارة يومي'.tr(), 'دخول السيارة'));
+                          ? {
+                              HomeCubit.get(context).getMaxKey(24),
+                              MagicRouter.navigateTo(AnnualPickupCar(
+                                  'إستلام سيارة سنوي'.tr(), 'تسليم سيارة'))
+                            }
+                          : {
+                              HomeCubit.get(context).getMaxKey(23),
+                              MagicRouter.navigateTo(DailyPickupCar(
+                                  'إستلام سيارة يومي'.tr(), 'دخول السيارة'))
+                            };
             },
             child: Padding(
               padding: REdgeInsetsDirectional.only(

@@ -11,6 +11,7 @@ class AnnualDeliveringCar extends StatefulWidget {
 }
 
 class _AnnualDeliveringCarState extends State<AnnualDeliveringCar> {
+
   var plate;
   var place1;
   var place2;
@@ -20,7 +21,6 @@ class _AnnualDeliveringCarState extends State<AnnualDeliveringCar> {
   var time;
   var cost1;
   var cost2;
-
   customRow1(text, hint, isSearch, context) {
     return Padding(
         padding: const EdgeInsets.only(top: 2.0, bottom: 2, left: 8, right: 8),
@@ -1076,7 +1076,7 @@ class _AnnualDeliveringCarState extends State<AnnualDeliveringCar> {
                   child: SizedBox(
                     width: 150.w,
                     child: TextFormField(
-                      enabled:text=='تاريخ الاسترجاع المتوقع: '.tr()||text=='تاريخ الحركة: '.tr()? false:true,
+                      enabled:text=='تاريخ الاسترجاع المتوقع: '.tr()||text=='تاريخ الحركة: '.tr()||text=='رقم الحركة: '.tr()? false:true,
                       decoration: InputDecoration(
                           errorStyle: TextStyle(
                               fontFamily: 'tj',
@@ -1088,8 +1088,8 @@ class _AnnualDeliveringCarState extends State<AnnualDeliveringCar> {
                           contentPadding: const EdgeInsets.fromLTRB(
                               0.0, 12.0, 0.0, 0.0),
                           hintText:
-                          ' ${text=='تاريخ الاسترجاع المتوقع: '.tr()?
-                          (date1??''):text=='تاريخ الحركة: '.tr()?(date2??''):''}',
+                          ' ${
+                              text=='رقم الحركة: '.tr()? (HomeCubit.get(context).GetMaxKey??''):text=='تاريخ الاسترجاع المتوقع: '.tr()? (date1??''):text=='تاريخ الحركة: '.tr()?(date2??''):''}',
                           hintStyle: const TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.w700),

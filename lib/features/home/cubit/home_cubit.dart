@@ -78,12 +78,33 @@ class HomeCubit extends Cubit<HomeState> {
       response
           .then((value) async => {
                 GetListPlace = value,
-                print(GetListPlace),
                 emit(GetPlaceSuccess()),
               })
           .onError((error, stackTrace) => {
                 print(error),
                 emit(GetPlaceFailed()),
+              });
+    }
+    // });
+  }
+
+  var GetMaxKey;
+  getMaxKey(id) async {
+    emit(GetMaxKeyLoading());
+    // connectivity.checkConnectivity().then((value) async {
+    //   if (ConnectivityResult.none == value) {
+    //   } else
+    {
+      var response = Api().getHttp(
+          url: 'https://smartautokw.com/api/eRP_CarsTRH/GetMaxKey/$id');
+      response
+          .then((value) async => {
+                GetMaxKey = value['Max'],
+                emit(GetMaxKeySuccess()),
+              })
+          .onError((error, stackTrace) => {
+                print(error),
+                emit(GetMaxKeyFailed()),
               });
     }
     // });
