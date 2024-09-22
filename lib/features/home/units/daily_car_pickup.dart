@@ -14,15 +14,23 @@ class DailyPickupCar extends StatefulWidget {
 
 class _DailyPickupCarState extends State<DailyPickupCar> {
   var plate;
-customRow4(text, hint, isSearch, context) {
-  return Padding(
-      padding: const EdgeInsets.only(top: 2.0, bottom: 2, left: 8, right: 8),
-      child: text == 'الحالة: '.tr()
-          ? Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          SizedBox(
+  var date;
+  var date1;
+  var date2;
+  var time;
+  var cost1;
+  var cost2;
+
+  customRow4(text, hint, isSearch, context)  {
+    return Padding(
+        padding: const EdgeInsets.only(top: 2.0, bottom: 2, left: 8, right: 8),
+        child:
+        text == 'الحالة: '.tr() ?
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            SizedBox(
               width: 150.w,
               child: CustomText(
                   align: TextAlign.end,
@@ -30,16 +38,20 @@ customRow4(text, hint, isSearch, context) {
                   line: 2,
                   color: Colors.black,
                   fontSize: 18.sp,
-                  fontWeight: FontWeight.bold)),
-          SizedBox(width: 5.w),
-          SizedBox(
-              width: 200.w,
-              child: DropdownButtonFormField(
-                padding: EdgeInsets.zero,
-                hint: CustomText(
-                    text: '', color: Colors.grey, fontSize: 18.sp),
-                focusColor: Colors.white,
-                decoration: InputDecoration(
+                  fontWeight: FontWeight.bold),
+            ),
+            SizedBox(width: 5.w),
+            SizedBox(
+                width: 200.w,
+                child: DropdownButtonFormField(
+                  padding: EdgeInsets.zero,
+                  hint: CustomText(
+                    text: '',
+                    color: Colors.grey,
+                    fontSize: 18.sp,
+                  ),
+                  focusColor: Colors.white,
+                  decoration: InputDecoration(
                     fillColor: Colors.white,
                     border: InputBorder.none,
                     focusColor: Colors.white,
@@ -47,17 +59,17 @@ customRow4(text, hint, isSearch, context) {
                         borderRadius: BorderRadius.circular(5.r),
                         borderSide:
                         const BorderSide(color: Colors.black54)),
+
                     disabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5.r),
-                        borderSide:
-                        const BorderSide(color: Colors.black54)),
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5.r),
-                        borderSide:
-                        const BorderSide(color: Colors.black54)),
+                        borderRadius:
+                        BorderRadius.circular(5.r),
+                        borderSide: const BorderSide(
+                            color: Colors.black54)),enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5.r),
+                      borderSide:
+                      const BorderSide(color: Colors.black54)),
                     filled: true,
-                    contentPadding:
-                    EdgeInsets.fromLTRB(5.w, 1.h, 5.w, 1.h),
+                    contentPadding: EdgeInsets.fromLTRB(5.w, 1.h, 5.w, 1.h),
                     errorBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5.r),
                         borderSide:
@@ -68,456 +80,594 @@ customRow4(text, hint, isSearch, context) {
                             Orientation.landscape
                             ? 7.sp
                             : 15.sp,
-                        color: Colors.black)),
-                isExpanded: true,
-                iconSize: 25.w,
-                itemHeight: 50,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                items: const <DropdownMenuItem<String>>[
-                  DropdownMenuItem(
-                      enabled: false, value: '', child: SizedBox())
-                ],
-                onChanged: (val) {},
-              ))
-        ],
-      )
-          : text == 'من تاريخ: '.tr()
-          ? Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Expanded(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      child: CustomText(
-                          align: TextAlign.start,
-                          text: 'من تاريخ: '.tr(),
-                          color: Colors.black,
-                          fontSize: 18.sp,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(
-                      width: EasyLocalization.of(
-                          navigatorKey.currentContext!)!
-                          .currentLocale ==
-                          const Locale('en', '')
-                          ? 80.w
-                          : 100.w,
-                      child: TextFormField(
-                        decoration: InputDecoration(
-                            errorStyle: TextStyle(
-                                fontFamily: 'tj',
-                                color: Colors.red,
-                                fontSize: ScreenUtil().orientation ==
-                                    Orientation.landscape
-                                    ? 10.sp
-                                    : 12.sp),
-                            contentPadding: const EdgeInsets.fromLTRB(
-                                0.0, 12.0, 0.0, 0.0),
-                            hintText: '',
-                            hintStyle: const TextStyle(
-                                color: Colors.grey,
-                                fontWeight: FontWeight.w700),
-                            filled: true,
-                            fillColor: Colors.white,
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10.r),
-                                borderSide: const BorderSide(
-                                    color: Colors.black54)),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10.r),
-                                borderSide: BorderSide(
-                                    color: Colors.black54,
-                                    width: .1.w,
-                                    style: BorderStyle.solid)),
-                            suffixIconColor: Colors.black),
-                      ),
-                    )
-                  ],
-                )),
-            Expanded(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      child: CustomText(
-                          align: TextAlign.start,
-                          text: 'من وقت: '.tr(),
-                          color: Colors.black,
-                          fontSize: 18.sp,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(
-                      width: EasyLocalization.of(
-                          navigatorKey.currentContext!)!
-                          .currentLocale ==
-                          const Locale('en', '')
-                          ? 80.w
-                          : 100.w,
-                      child: TextFormField(
-                        decoration: InputDecoration(
-                            errorStyle: TextStyle(
-                                fontFamily: 'tj',
-                                color: Colors.red,
-                                fontSize: ScreenUtil().orientation ==
-                                    Orientation.landscape
-                                    ? 10.sp
-                                    : 12.sp),
-                            contentPadding: const EdgeInsets.fromLTRB(
-                                0.0, 12.0, 0.0, 0.0),
-                            hintText: '',
-                            hintStyle: const TextStyle(
-                                color: Colors.grey,
-                                fontWeight: FontWeight.w700),
-                            filled: true,
-                            fillColor: Colors.white,
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10.r),
-                                borderSide: const BorderSide(
-                                    color: Colors.black54)),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10.r),
-                                borderSide: BorderSide(
-                                    color: Colors.black54,
-                                    width: .1.w,
-                                    style: BorderStyle.solid)),
-                            suffixIconColor: Colors.black),
-                      ),
-                    )
-                  ],
-                ))
-          ])
-          : isSearch == 'Column'
-          ? Column(
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              SizedBox(
-                width: 150.w,
-                child: CustomText(
-                    align: TextAlign.end,
-                    text: text,
-                    line: 2,
-                    color: Colors.black,
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.bold),
-              ),
-              SizedBox(width: 5.w),
-              Row(
-                children: [
-                  SizedBox(
-                    width: 150.w,
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                          errorStyle: TextStyle(
-                              fontFamily: 'tj',
-                              color: Colors.red,
-                              fontSize: ScreenUtil().orientation == Orientation.landscape
-                                  ? 10.sp
-                                  : 12.sp),
-                          contentPadding: const EdgeInsets.fromLTRB(
-                              0.0, 12.0, 0.0, 0.0),
-                          hintText: text == 'رقم اللوحة: '.tr()
-                              ? (plate == null
-                              ? ''
-                              : plate['Plate_No'])
-                              : '',
-                          hintStyle: const TextStyle(
-                              color: Colors.grey,
-                              fontWeight: FontWeight.w700),
-                          filled: true,
-                          fillColor: Colors.white,
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius:
-                              BorderRadius.circular(10.r),
-                              borderSide: const BorderSide(
-                                  color: Colors.black54)),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.r),
-                              borderSide: BorderSide(color: Colors.black54, width: .1.w, style: BorderStyle.solid)),
-                          suffixIconColor: Colors.black),
-                    ),
+                        color: Colors.black),
                   ),
-                  SizedBox(width: 5.w),
-                  isSearch == null
-                      ? const SizedBox()
-                      : InkWell(
-                    onTap: () {
-                      showDialog(
-                          useRootNavigator: false,
-                          context: context,
-                          builder: (dialogContext) {
-                            return SizedBox(
-                              height: 500.h,
-                              width: 1.sw,
-                              child: AlertDialog(
-                                  titlePadding: EdgeInsets.only(
-                                      left: 10.w, right: 10.w, top: 10.h, bottom: 10.h),
-                                  contentPadding: EdgeInsets.only(left: 0.w, right: 0.w, top: 10.h),
-                                  insetPadding:
-                                  EdgeInsets.symmetric(vertical: 5.h, horizontal: 10.w),
-                                  actionsPadding:
-                                  EdgeInsets.symmetric(horizontal: 0.w, vertical: 16.h),
-                                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                                  backgroundColor: const Color(0xFFFAFAFA),
-                                  surfaceTintColor: Colors.grey,
-                                  shadowColor: Colors.grey,
-                                  shape: RoundedRectangleBorder(
-                                      side: BorderSide(color: const Color(0xFFD6CECE), width: 1.w),
-                                      borderRadius: BorderRadius.all(Radius.circular(15.r))),
-                                  title: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      CustomText(
-                                          text: 'نافذه استعلاميه عن الموظفين'.tr(),
-                                          fontWeight: FontWeight.bold,
-                                          fontSize:
-                                          ScreenUtil().orientation == Orientation.landscape
-                                              ? 8.sp
-                                              : 23.sp,
-                                          color: Colors.black),
-                                      InkWell(
-                                          onTap: () {
-                                            MagicRouter.pop();
-                                          },
-                                          child: Container(
-                                              decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(20.r),
-                                                  color: Colors.red),
-                                              child: Icon(Icons.close,
-                                                  color: Colors.white, size: 20.w)))
-                                    ],
-                                  ),
-                                  content: SizedBox(
-                                      height: .5.sh,
-                                      width: 1.sw,
-                                      child:
-                                      // StatefulBuilder(
-                                      //                                       builder: (context, setState) {
-                                      //                                         return
-                                      Column(
-                                        children: [
-                                          Padding(
-                                            padding: EdgeInsetsDirectional.only(
-                                                start: 4.w, end: 4.w, bottom: 5.h),
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                  color: Colors.yellow,
-                                                  borderRadius:
-                                                  BorderRadiusDirectional.circular(5.r)),
-                                              child: Padding(
-                                                padding: EdgeInsetsDirectional.only(
-                                                    start: 2.w, end: 2.w, bottom: 5.h),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                  MainAxisAlignment.spaceBetween,
-                                                  children: [
-                                                    CustomText(
-                                                        text: text == 'رقم اللوحة: '.tr()
-                                                            ? "رقم اللوحة".tr()
-                                                            : 'كود الموظف'.tr(),
-                                                        fontWeight: FontWeight.bold,
-                                                        fontSize: ScreenUtil().orientation ==
-                                                            Orientation.landscape
-                                                            ? 8.sp
-                                                            : 13.sp,
-                                                        color: Colors.black),
-                                                    CustomText(
-                                                        text: text == 'رقم اللوحة: '.tr()
-                                                            ? "الوصف".tr()
-                                                            : 'اسم الموظف'.tr(),
-                                                        fontWeight: FontWeight.bold,
-                                                        fontSize: ScreenUtil().orientation ==
-                                                            Orientation.landscape
-                                                            ? 8.sp
-                                                            : 13.sp,
-                                                        color: Colors.black),
-                                                    text == 'رقم اللوحة: '.tr()
-                                                        ? const SizedBox()
-                                                        : CustomText(
-                                                        text: 'رقم التليفون'.tr(),
-                                                        fontWeight: FontWeight.bold,
-                                                        fontSize: ScreenUtil().orientation ==
-                                                            Orientation.landscape
-                                                            ? 8.sp
-                                                            : 13.sp,
-                                                        color: Colors.black)
-                                                  ],
+                  isExpanded: true,
+                  iconSize: 25.w,
+                  itemHeight: 50,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  items: const <DropdownMenuItem<String>>[
+                    DropdownMenuItem(
+                        enabled: false, value: '', child: SizedBox()),
+                  ],
+                  onChanged: (val) {},
+                ))
+          ],
+        )
+            : text == 'من تاريخ: '.tr() ?
+        Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        child: CustomText(
+                            align: TextAlign.start,
+                            text: 'من تاريخ: '.tr(),
+                            color: Colors.black,
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      InkWell(
+                        onTap: ()async{
+
+                          DateTime?
+                          newDate =
+                          await showDatePicker(
+                            useRootNavigator: false,
+                            context: context,
+                            barrierDismissible: false,
+                            firstDate: DateTime(
+                                2024),
+                            lastDate: DateTime(
+                                3000),
+                            initialDate: DateTime.now(),
+                          );
+                          if (newDate == null) {return;}
+                          setState(() {
+                            newDate.day.toString();
+                            newDate.month.toString();
+                            newDate.year.toString();
+                            date = DateFormat('yyyy-MM-dd', 'en').format(newDate);
+                          });
+
+                        },
+                        child: SizedBox(
+                          width: EasyLocalization.of(
+                              navigatorKey.currentContext!)!
+                              .currentLocale ==
+                              const Locale('en', '')
+                              ? 80.w
+                              : 100.w,
+                          child: TextFormField(
+                            enabled: false,
+                            decoration: InputDecoration(
+                                errorStyle: TextStyle(
+                                    fontFamily: 'tj',
+                                    color: Colors.red,
+                                    fontSize: ScreenUtil().orientation ==
+                                        Orientation.landscape
+                                        ? 10.sp
+                                        : 12.sp),
+                                contentPadding: const EdgeInsets.fromLTRB(
+                                    0.0, 12.0, 0.0, 0.0),
+                                hintText: ' ${date??''}',
+                                hintStyle: const TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w700),
+                                filled: true,
+                                fillColor: Colors.white,
+                                disabledBorder: OutlineInputBorder(
+                                    borderRadius:
+                                    BorderRadius.circular(10.r),
+                                    borderSide: const BorderSide(
+                                        color: Colors.black54)),enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.r),
+                                borderSide: const BorderSide(
+                                    color: Colors.black54)),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10.r),
+                                    borderSide: BorderSide(
+                                        color: Colors.black54,
+                                        width: .1.w,
+                                        style: BorderStyle.solid)),
+                                suffixIconColor: Colors.black),
+                          ),
+                        ),
+                      )
+                    ],
+                  )),
+              Expanded(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        child: CustomText(
+                            align: TextAlign.start,
+                            text: 'من وقت: '.tr(),
+                            color: Colors.black,
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      InkWell(
+                        onTap: () async {
+                          TimeOfDay? newDate = await showTimePicker(
+                            useRootNavigator: false,
+                            context: context,
+                            barrierDismissible: false,
+                            initialTime: TimeOfDay.now(),
+                            initialEntryMode:
+                            TimePickerEntryMode.dial,
+                          );
+                          if (newDate == null) return;
+
+                          setState(() {
+
+                            final now =  DateTime.now();
+                            var date= DateTime(now.year, now.month, now.day, newDate.hour, newDate.minute);
+                            time = DateFormat("HH:mm",'en').format(date);
+
+                            // print(newDate.replacing().toString().replaceAll('TimeOfDay(', '').replaceAll(')', ''));
+                          });
+                        },
+                        child: SizedBox(
+                          width: EasyLocalization.of(
+                              navigatorKey.currentContext!)!
+                              .currentLocale ==
+                              const Locale('en', '')
+                              ? 80.w
+                              : 100.w,
+                          child: TextFormField( enabled: false,
+                            decoration: InputDecoration(
+                                errorStyle: TextStyle(
+                                    fontFamily: 'tj',
+                                    color: Colors.red,
+                                    fontSize: ScreenUtil().orientation ==
+                                        Orientation.landscape
+                                        ? 10.sp
+                                        : 12.sp),
+                                contentPadding: const EdgeInsets.fromLTRB(
+                                    0.0, 12.0, 0.0, 0.0),
+                                hintText: ' ${time??''}',
+                                hintStyle: const TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w700),
+                                filled: true,
+                                fillColor: Colors.white,
+                                disabledBorder: OutlineInputBorder(
+                                    borderRadius:
+                                    BorderRadius.circular(10.r),
+                                    borderSide: const BorderSide(
+                                        color: Colors.black54)),enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.r),
+                                borderSide: const BorderSide(
+                                    color: Colors.black54)),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10.r),
+                                    borderSide: BorderSide(
+                                        color: Colors.black54,
+                                        width: .1.w,
+                                        style: BorderStyle.solid)),
+                                suffixIconColor: Colors.black),
+                          ),
+                        ),
+                      )
+                    ],
+                  ))
+            ])
+
+            : isSearch == 'Column' ?
+        Column(
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(
+                    width: 150.w,
+                    child: CustomText(
+                        align: TextAlign.end,
+                        text: text,
+                        line: 2,
+                        color: Colors.black,
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.bold)
+                ),
+                SizedBox(width: 5.w),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 150.w,
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                            errorStyle: TextStyle(
+                                fontFamily: 'tj',
+                                color: Colors.red,
+                                fontSize: ScreenUtil().orientation == Orientation.landscape
+                                    ? 10.sp
+                                    : 12.sp),
+                            contentPadding: const EdgeInsets.fromLTRB(
+                                0.0, 12.0, 0.0, 0.0),
+                            hintText: ' ${text == 'رقم اللوحة: '.tr()
+                                ? (plate == null
+                                ? ''
+                                : plate['Plate_No'])
+                                :
+                            text == 'من مركز التلكفة: '.tr()
+                                ? (cost1 == null
+                                ? ''
+                                : cost1['CST_No'])
+                                :
+                            text == 'الى مركز التلكفة: '.tr()
+                                ? (cost2 == null
+                                ? ''
+                                : cost2['CST_No'])
+                                : ''}',
+                            hintStyle: const TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w700),
+                            filled: true,
+                            fillColor: Colors.white,
+                            disabledBorder: OutlineInputBorder(
+                                borderRadius:
+                                BorderRadius.circular(10.r),
+                                borderSide: const BorderSide(
+                                    color: Colors.black54)),enabledBorder: OutlineInputBorder(
+                            borderRadius:
+                            BorderRadius.circular(10.r),
+                            borderSide: const BorderSide(
+                                color: Colors.black54)),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.r),
+                                borderSide: BorderSide(color: Colors.black54, width: .1.w, style: BorderStyle.solid)),
+                            suffixIconColor: Colors.black),
+                      ),
+                    ),
+                    SizedBox(width: 5.w),
+                    isSearch == null
+                        ? const SizedBox()
+                        : InkWell(
+                      onTap: () {
+                        showDialog(
+                            useRootNavigator: false,
+                            context: context,
+                            builder: (dialogContext) {
+                              return SizedBox(
+                                height: 500.h,
+                                width: 1.sw,
+                                child: AlertDialog(
+                                    titlePadding: EdgeInsets.only(
+                                        left: 10.w, right: 10.w, top: 10.h, bottom: 10.h),
+                                    contentPadding: EdgeInsets.only(left: 0.w, right: 0.w, top: 10.h),
+                                    insetPadding:
+                                    EdgeInsets.symmetric(vertical: 5.h, horizontal: 10.w),
+                                    actionsPadding:
+                                    EdgeInsets.symmetric(horizontal: 0.w, vertical: 16.h),
+                                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                                    backgroundColor: const Color(0xFFFAFAFA),
+                                    surfaceTintColor: Colors.grey,
+                                    shadowColor: Colors.grey,
+                                    shape: RoundedRectangleBorder(
+                                        side: BorderSide(color: const Color(0xFFD6CECE), width: 1.w),
+                                        borderRadius: BorderRadius.all(Radius.circular(15.r))),
+                                    title: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Spacer(),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: [
+                                            CustomText(
+                                                text: text == 'رقم اللوحة: '.tr()?
+                                                'نافذه استعلاميه عن اللوحات'.tr():
+                                                text == 'من مركز التلكفة: '.tr()|| text == 'الى مركز التلكفة: '.tr()?
+                                                'نافذه استعلاميه عن مراكز التلكفة'.tr():
+                                                'نافذه استعلاميه عن الموظفين'.tr(),
+                                                fontWeight: FontWeight.bold,
+                                                fontSize:
+                                                ScreenUtil().orientation == Orientation.landscape
+                                                    ? 8.sp
+                                                    : 16.sp,
+                                                color: Colors.black),
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.end,
+                                          crossAxisAlignment: CrossAxisAlignment.end,
+                                          children: [
+                                            InkWell(
+                                                onTap: () {
+                                                  MagicRouter.pop();
+                                                },
+                                                child: Container(
+                                                    decoration: BoxDecoration(
+                                                        borderRadius: BorderRadius.circular(20.r),
+                                                        color: Colors.red),
+                                                    child: Icon(Icons.close,
+                                                        color: Colors.white, size: 20.w))),
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                    content: SizedBox(
+                                        height: .5.sh,
+                                        width: 1.sw,
+                                        child:
+                                        Column(
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsetsDirectional.only(
+                                                  start: 4.w, end: 4.w, bottom: 5.h),
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                    color: Colors.yellow,
+                                                    borderRadius:
+                                                    BorderRadiusDirectional.circular(5.r)),
+                                                child: Padding(
+                                                  padding: EdgeInsetsDirectional.only(
+                                                      start: 2.w, end: 2.w, bottom: 5.h),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                    MainAxisAlignment.spaceBetween,
+                                                    children: [
+                                                      CustomText(
+                                                          text: text == 'رقم اللوحة: '.tr()
+                                                              ? "رقم اللوحة".tr()
+                                                              :
+                                                          text == 'الى مركز التلكفة: '.tr()||text== 'من مركز التلكفة: '.tr()
+                                                              ? "الكود".tr()
+                                                              : 'كود الموظف'.tr(),
+                                                          fontWeight: FontWeight.bold,
+                                                          fontSize: ScreenUtil().orientation ==
+                                                              Orientation.landscape
+                                                              ? 8.sp
+                                                              : 13.sp,
+                                                          color: Colors.black),
+                                                      CustomText(
+                                                          text: text == 'رقم اللوحة: '.tr() || text == 'الى مركز التلكفة: '.tr()||text== 'من مركز التلكفة: '.tr()
+                                                              ? "الوصف".tr()
+                                                              : 'اسم الموظف'.tr(),
+                                                          fontWeight: FontWeight.bold,
+                                                          fontSize: ScreenUtil().orientation ==
+                                                              Orientation.landscape
+                                                              ? 8.sp
+                                                              : 13.sp,
+                                                          color: Colors.black),
+                                                      text == 'رقم اللوحة: '.tr()|| text == 'الى مركز التلكفة: '.tr()||text== 'من مركز التلكفة: '.tr()
+                                                          ? const SizedBox()
+                                                          : CustomText(
+                                                          text: 'رقم التليفون'.tr(),
+                                                          fontWeight: FontWeight.bold,
+                                                          fontSize: ScreenUtil().orientation ==
+                                                              Orientation.landscape
+                                                              ? 8.sp
+                                                              : 13.sp,
+                                                          color: Colors.black)
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                          Expanded(
-                                            child: SingleChildScrollView(
-                                              child: ListView.builder(
-                                                shrinkWrap: true,
-                                                padding: EdgeInsets.zero,
-                                                itemCount:
-                                                // text == 'رقم اللوحة: '.tr()
-                                                // ? HomeCubit.get(context).getPlate.length:
-                                                text == 'رقم اللوحة: '.tr()
-                                                    ? HomeCubit.get(context)
-                                                    .GetListPlateEN!
-                                                    .length
-                                                    : 3,
-                                                scrollDirection: Axis.vertical,
-                                                physics: const BouncingScrollPhysics(),
-                                                itemBuilder: (context, index) {
-                                                  return InkWell(
-                                                    onTap: () {
-                                                      // text == 'رقم اللوحة: '.tr()
-                                                      //     ? (getPlate =
-                                                      //         HomeCubit.get(context).getPlate)
-                                                      //     :
-                                                      text == 'رقم اللوحة: '.tr()
-                                                          ? {
+                                            Expanded(
+                                              child: SingleChildScrollView(
+                                                child:
+                                                text == 'رقم اللوحة: '.tr() &&HomeCubit.get(context).GetListPlateEN==null
+                                                    ?const SizedBox():
+                                                (text == 'الى مركز التلكفة: '.tr()||text== 'من مركز التلكفة: '.tr()) && HomeCubit.get(context).GetListCostAR==null
+                                                    ?const SizedBox():
 
-                                                        setState(() {
-                                                          plate ==
-                                                              HomeCubit.get(context)
-                                                                  .GetListPlateEN[index];
-                                                          plate =
-                                                          HomeCubit.get(context)
-                                                              .GetListPlateEN[index];
-                                                          print("plate==== $plate");
-                                                          MagicRouter.pop();
-                                                        }),
-                                                      }
-                                                          : '';
-                                                    },
-                                                    child: Padding(
-                                                      padding: EdgeInsetsDirectional.only(
-                                                          start: 5.w, end: 5.w, bottom: 5.h),
-                                                      child: Row(
-                                                        mainAxisAlignment:
-                                                        MainAxisAlignment.spaceBetween,
-                                                        children: [
-                                                          CustomText(
-                                                              text: text == 'رقم اللوحة: '.tr()
-                                                                  ? HomeCubit.get(context)
-                                                                  .GetListPlateEN[index]
-                                                              ['Plate_No']
-                                                                  : '123',
-                                                              fontWeight: FontWeight.w600,
-                                                              fontSize:
-                                                              ScreenUtil().orientation ==
-                                                                  Orientation.landscape
-                                                                  ? 6.sp
-                                                                  : 13.sp,
-                                                              color: Colors.black),
-                                                          CustomText(
-                                                              text: text == 'رقم اللوحة: '.tr()
-                                                                  ? HomeCubit.get(context)
-                                                                  .GetListPlateEN[index]
-                                                              ['fa_DSC_En']
-                                                                  .toString()
-                                                                  : 'محمد عاطف',
-                                                              fontWeight: FontWeight.w600,
-                                                              fontSize:
-                                                              ScreenUtil().orientation ==
-                                                                  Orientation.landscape
-                                                                  ? 6.sp
-                                                                  : 13.sp,
-                                                              color: Colors.black),
-                                                          text == 'رقم اللوحة: '.tr()
-                                                              ? const SizedBox()
-                                                              : CustomText(
-                                                              text: '01021424949',
-                                                              fontWeight: FontWeight.w600,
-                                                              fontSize: ScreenUtil()
-                                                                  .orientation ==
-                                                                  Orientation.landscape
-                                                                  ? 6.sp
-                                                                  : 13.sp,
-                                                              color: Colors.black)
-                                                        ],
+                                                ListView.builder(
+                                                  shrinkWrap: true,
+                                                  padding: EdgeInsets.zero,
+                                                  itemCount:
+                                                  text == 'رقم اللوحة: '.tr()
+                                                      ? HomeCubit.get(context)
+                                                      .GetListPlateEN!
+                                                      .length
+                                                      :
+                                                  text == 'الى مركز التلكفة: '.tr()||text== 'من مركز التلكفة: '.tr()
+                                                      ? HomeCubit.get(context)
+                                                      .GetListCostAR!
+                                                      .length
+                                                      : 3,
+                                                  scrollDirection: Axis.vertical,
+                                                  physics: const BouncingScrollPhysics(),
+                                                  itemBuilder: (context, index) {
+                                                    return InkWell(
+                                                      onTap: () {
+                                                        text == 'رقم اللوحة: '.tr()
+                                                            ? {
+                                                          setState(() {
+                                                            plate ==
+                                                                HomeCubit.get(context)
+                                                                    .GetListPlateEN[index];
+                                                            plate =
+                                                            HomeCubit.get(context)
+                                                                .GetListPlateEN[index];
+                                                            MagicRouter.pop();
+                                                          }),
+                                                        }: text == 'الى مركز التلكفة: '.tr()
+                                                            ? {
+                                                          setState(() {
+                                                            cost2 ==
+                                                                HomeCubit.get(context)
+                                                                    .GetListCostAR[index];
+                                                            cost2 =
+                                                            HomeCubit.get(context)
+                                                                .GetListCostAR[index];
+                                                            MagicRouter.pop();
+                                                          }),
+                                                        }
+                                                            : text== 'من مركز التلكفة: '.tr()
+                                                            ? {
+                                                          setState(() {
+                                                            cost1 ==
+                                                                HomeCubit.get(context)
+                                                                    .GetListCostAR[index];
+                                                            cost1 =
+                                                            HomeCubit.get(context)
+                                                                .GetListCostAR[index];
+                                                            MagicRouter.pop();
+                                                          }),
+                                                        }
+                                                            : '';
+                                                      },
+                                                      child: Padding(
+                                                        padding: EdgeInsetsDirectional.only(
+                                                            start: 5.w, end: 5.w, bottom: 5.h),
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                          MainAxisAlignment.spaceBetween,
+                                                          children: [
+                                                            CustomText(
+                                                                text: text == 'رقم اللوحة: '.tr()
+                                                                    ? HomeCubit.get(context)
+                                                                    .GetListPlateEN[index]
+                                                                ['Plate_No']
+                                                                    :
+                                                                text == 'الى مركز التلكفة: '.tr()||text== 'من مركز التلكفة: '.tr()
+                                                                    ? HomeCubit.get(context)
+                                                                    .GetListCostAR[index]
+                                                                ['CST_No']
+                                                                    : '123',
+                                                                fontWeight: FontWeight.w600,
+                                                                fontSize:
+                                                                ScreenUtil().orientation ==
+                                                                    Orientation.landscape
+                                                                    ? 6.sp
+                                                                    : 13.sp,
+                                                                color: Colors.black),
+                                                            CustomText(
+                                                                text: text == 'رقم اللوحة: '.tr()
+                                                                    ? HomeCubit.get(context)
+                                                                    .GetListPlateEN[index]
+                                                                ['fa_DSC_En']
+                                                                    .toString()
+                                                                    :
+                                                                text == 'الى مركز التلكفة: '.tr()||text== 'من مركز التلكفة: '.tr()
+                                                                    ? HomeCubit.get(context)
+                                                                    .GetListCostAR[index]
+                                                                ['CST_NM_AR']
+                                                                    :
+                                                                'محمد عاطف',
+                                                                fontWeight: FontWeight.w600,
+                                                                fontSize:
+                                                                ScreenUtil().orientation ==
+                                                                    Orientation.landscape
+                                                                    ? 6.sp
+                                                                    : 13.sp,
+                                                                color: Colors.black),
+                                                            text == 'رقم اللوحة: '.tr()||text == 'الى مركز التلكفة: '.tr()||text== 'من مركز التلكفة: '.tr()
+                                                                ? const SizedBox()
+                                                                : CustomText(
+                                                                text: '01021424949',
+                                                                fontWeight: FontWeight.w600,
+                                                                fontSize: ScreenUtil()
+                                                                    .orientation ==
+                                                                    Orientation.landscape
+                                                                    ? 6.sp
+                                                                    : 13.sp,
+                                                                color: Colors.black)
+                                                          ],
+                                                        ),
                                                       ),
-                                                    ),
-                                                  );
-                                                },
+                                                    );
+                                                  },
+                                                ),
                                               ),
-                                            ),
-                                          )
-                                        ],
-                                      )
-                                    //   },
-                                    // ),
-                                  )),
-                            );
-                          });
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.yellow,
-                          borderRadius:
-                          BorderRadiusDirectional
-                              .circular(8.r)),
-                      child: Padding(
-                          padding: EdgeInsets.symmetric(
-                              vertical: 5.h,
-                              horizontal: 5.w),
-                          child: const Icon(Icons.search,
-                              color: Colors.black)),
-                    ),
-                  )
-                ],
-              )
-            ],
-          ),
-          const SizedBox(height: 4),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              SizedBox(
-                width: 205.w,
-                child: TextFormField(
-                  decoration: InputDecoration(
-                      errorStyle: TextStyle(
-                          fontFamily: 'tj',
-                          color: Colors.red,
-                          fontSize: ScreenUtil().orientation ==
-                              Orientation.landscape
-                              ? 10.sp
-                              : 12.sp),
-                      contentPadding: const EdgeInsets.fromLTRB(
-                          0.0, 0.0, 0.0, 0.0),
-                      hintText: text == 'رقم اللوحة: '.tr()
-                          ? (plate == null
-                          ? ''
-                          : plate['fa_DSC_En'])
-                          : '',
-                      hintStyle: const TextStyle(
-                          color: Colors.grey,
-                          fontWeight: FontWeight.w700),
-                      filled: true,
-                      fillColor: Colors.white,
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius:
-                          BorderRadius.circular(10.r),
-                          borderSide: const BorderSide(
-                              color: Colors.black54)),
-                      border: OutlineInputBorder(
-                          borderRadius:
-                          BorderRadius.circular(10.r),
-                          borderSide: BorderSide(color: Colors.black54, width: .1.w, style: BorderStyle.solid)),
-                      suffixIconColor: Colors.black),
-                ),
-              )
-            ],
-          )
-        ],
-      )
-          : Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          SizedBox(
+                                            )
+                                          ],
+                                        )
+                                    )),
+                              );
+                            });
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.yellow,
+                            borderRadius:
+                            BorderRadiusDirectional
+                                .circular(8.r)),
+                        child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 5.h,
+                                horizontal: 5.w),
+                            child: const Icon(Icons.search,
+                                color: Colors.black)),
+                      ),
+                    )
+                  ],
+                )
+              ],
+            ),
+            const SizedBox(height: 4),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                SizedBox(
+                  width: 205.w,
+                  child: TextFormField( enabled: false,
+                    decoration: InputDecoration(
+                        errorStyle: TextStyle(
+                            fontFamily: 'tj',
+                            color: Colors.red,
+                            fontSize: ScreenUtil().orientation ==
+                                Orientation.landscape
+                                ? 10.sp
+                                : 12.sp),
+                        contentPadding: const EdgeInsets.fromLTRB(
+                            0.0, 0.0, 0.0, 0.0),
+                        hintText: ' ${text == 'رقم اللوحة: '.tr()
+                            ? (plate == null
+                            ? ''
+                            : plate['fa_DSC_En'])
+                            : text == 'من مركز التلكفة: '.tr()
+                            ? (cost1 == null
+                            ? ''
+                            : cost1['CST_NM_AR'])
+                            :
+                        text == 'الى مركز التلكفة: '.tr()
+                            ? (cost2 == null
+                            ? ''
+                            : cost2['CST_NM_AR'])
+                            : ''}',
+                        hintStyle: const TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w700),
+                        filled: true,
+                        fillColor: Colors.white,
+                        disabledBorder: OutlineInputBorder(
+                            borderRadius:
+                            BorderRadius.circular(10.r),
+                            borderSide: const BorderSide(
+                                color: Colors.black54)),enabledBorder: OutlineInputBorder(
+                        borderRadius:
+                        BorderRadius.circular(10.r),
+                        borderSide: const BorderSide(
+                            color: Colors.black54)),
+                        border: OutlineInputBorder(
+                            borderRadius:
+                            BorderRadius.circular(10.r),
+                            borderSide: BorderSide(color: Colors.black54, width: .1.w, style: BorderStyle.solid)),
+                        suffixIconColor: Colors.black),
+                  ),
+                )
+              ],
+            )
+          ],
+        )
+            : Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            SizedBox(
               width: 150.w,
               child: CustomText(
                   align: TextAlign.end,
@@ -525,39 +675,69 @@ customRow4(text, hint, isSearch, context) {
                   line: 2,
                   color: Colors.black,
                   fontSize: 18.sp,
-                  fontWeight: FontWeight.bold)),
-          SizedBox(width: 5.w),
-          Row(
-            children: [
-              SizedBox(
-                  width: 150.w,
-                  child: TextFormField(
+                  fontWeight: FontWeight.bold),
+            ),
+            SizedBox(width: 5.w),
+            Row(
+              children: [
+                InkWell(
+                  onTap:text=='تاريخ الاسترجاع المتوقع: '.tr()||text=='تاريخ الحركة: '.tr()? () async{
+
+                    DateTime?
+                    newDate =
+                    await showDatePicker(
+                      useRootNavigator: false,
+                      context: context,
+                      barrierDismissible: false,
+                      firstDate: DateTime(
+                          2024),
+                      lastDate: DateTime(
+                          3000),
+                      initialDate: DateTime.now(),
+                    );
+                    if (newDate == null) {return;}
+                    setState(() {
+                      newDate.day.toString();
+                      newDate.month.toString();
+                      newDate.year.toString();
+                      text=='تاريخ الاسترجاع المتوقع: '.tr()?
+                      date1 = DateFormat('yyyy-MM-dd', 'en').format(newDate):
+                      date2 = DateFormat('yyyy-MM-dd', 'en').format(newDate);
+                    });
+                  }
+                      :(){},
+                  child: SizedBox(
+                    width: 150.w,
+                    child: TextFormField(
+                      enabled:text=='تاريخ الاسترجاع المتوقع: '.tr()||text=='تاريخ الحركة: '.tr()? false:true,
                       decoration: InputDecoration(
                           errorStyle: TextStyle(
                               fontFamily: 'tj',
                               color: Colors.red,
-                              fontSize:
-                              ScreenUtil().orientation ==
+                              fontSize: ScreenUtil().orientation ==
                                   Orientation.landscape
                                   ? 10.sp
                                   : 12.sp),
-                          contentPadding:
-                          const EdgeInsets.fromLTRB(
+                          contentPadding: const EdgeInsets.fromLTRB(
                               0.0, 12.0, 0.0, 0.0),
                           hintText:
-                          // text == 'رقم اللوحة: '.tr()
-                          //     ? HomeCubit.get(context).getPlates['fa_DSC_Ar']:
-                          '',
+                          ' ${text=='تاريخ الاسترجاع المتوقع: '.tr()?
+                          (date1??''):text=='تاريخ الحركة: '.tr()?(date2??''):''}',
                           hintStyle: const TextStyle(
-                              color: Colors.grey,
+                              color: Colors.black,
                               fontWeight: FontWeight.w700),
                           filled: true,
                           fillColor: Colors.white,
-                          enabledBorder: OutlineInputBorder(
+                          disabledBorder: OutlineInputBorder(
                               borderRadius:
                               BorderRadius.circular(10.r),
                               borderSide: const BorderSide(
-                                  color: Colors.black54)),
+                                  color: Colors.black54)),enabledBorder: OutlineInputBorder(
+                          borderRadius:
+                          BorderRadius.circular(10.r),
+                          borderSide: const BorderSide(
+                              color: Colors.black54)),
+
                           border: OutlineInputBorder(
                               borderRadius:
                               BorderRadius.circular(10.r),
@@ -565,31 +745,289 @@ customRow4(text, hint, isSearch, context) {
                                   color: Colors.black54,
                                   width: .1.w,
                                   style: BorderStyle.solid)),
-                          suffixIconColor: Colors.black))),
-              SizedBox(width: 5.w),
-              isSearch == null
-                  ? const SizedBox()
-                  : InkWell(
-                onTap: () =>
-                    customDialogShowUsers(context, text),
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.yellow,
-                      borderRadius:
-                      BorderRadiusDirectional.circular(
-                          8.r)),
-                  child: Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: 5.h, horizontal: 5.w),
-                      child: const Icon(Icons.search,
-                          color: Colors.black)),
+                          suffixIconColor: Colors.black),
+                    ),
+                  ),
                 ),
-              )
-            ],
-          )
-        ],
-      ));
-}
+                SizedBox(width: 5.w),
+                isSearch == null
+                    ? const SizedBox()
+                    : InkWell(
+                  onTap: () {
+                    showDialog(
+                        useRootNavigator: false,
+                        context: context,
+                        builder: (dialogContext) {
+                          return SizedBox(
+                            height: 500.h,
+                            width: 1.sw,
+                            child: AlertDialog(
+                                titlePadding: EdgeInsets.only(
+                                    left: 10.w, right: 10.w, top: 10.h, bottom: 10.h),
+                                contentPadding: EdgeInsets.only(left: 0.w, right: 0.w, top: 10.h),
+                                insetPadding:
+                                EdgeInsets.symmetric(vertical: 5.h, horizontal: 10.w),
+                                actionsPadding:
+                                EdgeInsets.symmetric(horizontal: 0.w, vertical: 16.h),
+                                clipBehavior: Clip.antiAliasWithSaveLayer,
+                                backgroundColor: const Color(0xFFFAFAFA),
+                                surfaceTintColor: Colors.grey,
+                                shadowColor: Colors.grey,
+                                shape: RoundedRectangleBorder(
+                                    side: BorderSide(color: const Color(0xFFD6CECE), width: 1.w),
+                                    borderRadius: BorderRadius.all(Radius.circular(15.r))),
+                                title: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Spacer(),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        CustomText(
+                                            text: text == 'رقم اللوحة: '.tr()?
+                                            'نافذه استعلاميه عن اللوحات'.tr():
+                                            text == 'من مركز التلكفة: '.tr()|| text == 'الى مركز التلكفة: '.tr()?
+                                            'نافذه استعلاميه عن مراكز التلكفة'.tr():
+                                            'نافذه استعلاميه عن الموظفين'.tr(),
+                                            fontWeight: FontWeight.bold,
+                                            fontSize:
+                                            ScreenUtil().orientation == Orientation.landscape
+                                                ? 8.sp
+                                                : 16.sp,
+                                            color: Colors.black),
+                                      ],
+                                    ),
+                                    Spacer(),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      children: [
+                                        InkWell(
+                                            onTap: () {
+                                              MagicRouter.pop();
+                                            },
+                                            child: Container(
+                                                decoration: BoxDecoration(
+                                                    borderRadius: BorderRadius.circular(20.r),
+                                                    color: Colors.red),
+                                                child: Icon(Icons.close,
+                                                    color: Colors.white, size: 20.w))),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                                content: SizedBox(
+                                    height: .5.sh,
+                                    width: 1.sw,
+                                    child:
+                                    Column(
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsetsDirectional.only(
+                                              start: 4.w, end: 4.w, bottom: 5.h),
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                                color: Colors.yellow,
+                                                borderRadius:
+                                                BorderRadiusDirectional.circular(5.r)),
+                                            child: Padding(
+                                              padding: EdgeInsetsDirectional.only(
+                                                  start: 2.w, end: 2.w, bottom: 5.h),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  CustomText(
+                                                      text: text == 'رقم اللوحة: '.tr()
+                                                          ? "رقم اللوحة".tr()
+                                                          :
+                                                      text == 'الى مركز التلكفة: '.tr()||text== 'من مركز التلكفة: '.tr()
+                                                          ? "الكود".tr()
+                                                          : 'كود الموظف'.tr(),
+                                                      fontWeight: FontWeight.bold,
+                                                      fontSize: ScreenUtil().orientation ==
+                                                          Orientation.landscape
+                                                          ? 8.sp
+                                                          : 13.sp,
+                                                      color: Colors.black),
+                                                  CustomText(
+                                                      text: text == 'رقم اللوحة: '.tr() || text == 'الى مركز التلكفة: '.tr()||text== 'من مركز التلكفة: '.tr()
+                                                          ? "الوصف".tr()
+                                                          : 'اسم الموظف'.tr(),
+                                                      fontWeight: FontWeight.bold,
+                                                      fontSize: ScreenUtil().orientation ==
+                                                          Orientation.landscape
+                                                          ? 8.sp
+                                                          : 13.sp,
+                                                      color: Colors.black),
+                                                  text == 'رقم اللوحة: '.tr()|| text == 'الى مركز التلكفة: '.tr()||text== 'من مركز التلكفة: '.tr()
+                                                      ? const SizedBox()
+                                                      : CustomText(
+                                                      text: 'رقم التليفون'.tr(),
+                                                      fontWeight: FontWeight.bold,
+                                                      fontSize: ScreenUtil().orientation ==
+                                                          Orientation.landscape
+                                                          ? 8.sp
+                                                          : 13.sp,
+                                                      color: Colors.black)
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: SingleChildScrollView(
+                                            child:
+                                            text == 'رقم اللوحة: '.tr() &&HomeCubit.get(context).GetListPlateEN==null
+                                                ?const SizedBox():
+                                            (text == 'الى مركز التلكفة: '.tr()||text== 'من مركز التلكفة: '.tr()) && HomeCubit.get(context).GetListCostAR==null
+                                                ?const SizedBox():
+
+                                            ListView.builder(
+                                              shrinkWrap: true,
+                                              padding: EdgeInsets.zero,
+                                              itemCount:
+                                              text == 'رقم اللوحة: '.tr()
+                                                  ? HomeCubit.get(context)
+                                                  .GetListPlateEN!
+                                                  .length
+                                                  :
+                                              text == 'الى مركز التلكفة: '.tr()||text== 'من مركز التلكفة: '.tr()
+                                                  ? HomeCubit.get(context)
+                                                  .GetListCostAR!
+                                                  .length
+                                                  : 3,
+                                              scrollDirection: Axis.vertical,
+                                              physics: const BouncingScrollPhysics(),
+                                              itemBuilder: (context, index) {
+                                                return InkWell(
+                                                  onTap: () {
+                                                    text == 'رقم اللوحة: '.tr()
+                                                        ? {
+                                                      setState(() {
+                                                        plate ==
+                                                            HomeCubit.get(context)
+                                                                .GetListPlateEN[index];
+                                                        plate =
+                                                        HomeCubit.get(context)
+                                                            .GetListPlateEN[index];
+                                                        MagicRouter.pop();
+                                                      }),
+                                                    }: text == 'الى مركز التلكفة: '.tr()
+                                                        ? {
+                                                      setState(() {
+                                                        cost2 ==
+                                                            HomeCubit.get(context)
+                                                                .GetListCostAR[index];
+                                                        cost2 =
+                                                        HomeCubit.get(context)
+                                                            .GetListCostAR[index];
+                                                        MagicRouter.pop();
+                                                      }),
+                                                    }
+                                                        : text== 'من مركز التلكفة: '.tr()
+                                                        ? {
+                                                      setState(() {
+                                                        cost1 ==
+                                                            HomeCubit.get(context)
+                                                                .GetListCostAR[index];
+                                                        cost1 =
+                                                        HomeCubit.get(context)
+                                                            .GetListCostAR[index];
+                                                        MagicRouter.pop();
+                                                      }),
+                                                    }
+                                                        : '';
+                                                  },
+                                                  child: Padding(
+                                                    padding: EdgeInsetsDirectional.only(
+                                                        start: 5.w, end: 5.w, bottom: 5.h),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                      MainAxisAlignment.spaceBetween,
+                                                      children: [
+                                                        CustomText(
+                                                            text: text == 'رقم اللوحة: '.tr()
+                                                                ? HomeCubit.get(context)
+                                                                .GetListPlateEN[index]
+                                                            ['Plate_No']
+                                                                :
+                                                            text == 'الى مركز التلكفة: '.tr()||text== 'من مركز التلكفة: '.tr()
+                                                                ? HomeCubit.get(context)
+                                                                .GetListCostAR[index]
+                                                            ['CST_No']
+                                                                : '123',
+                                                            fontWeight: FontWeight.w600,
+                                                            fontSize:
+                                                            ScreenUtil().orientation ==
+                                                                Orientation.landscape
+                                                                ? 6.sp
+                                                                : 13.sp,
+                                                            color: Colors.black),
+                                                        CustomText(
+                                                            text: text == 'رقم اللوحة: '.tr()
+                                                                ? HomeCubit.get(context)
+                                                                .GetListPlateEN[index]
+                                                            ['fa_DSC_En']
+                                                                .toString()
+                                                                :
+                                                            text == 'الى مركز التلكفة: '.tr()||text== 'من مركز التلكفة: '.tr()
+                                                                ? HomeCubit.get(context)
+                                                                .GetListCostAR[index]
+                                                            ['CST_NM_AR']
+                                                                :
+                                                            'محمد عاطف',
+                                                            fontWeight: FontWeight.w600,
+                                                            fontSize:
+                                                            ScreenUtil().orientation ==
+                                                                Orientation.landscape
+                                                                ? 6.sp
+                                                                : 13.sp,
+                                                            color: Colors.black),
+                                                        text == 'رقم اللوحة: '.tr()||text == 'الى مركز التلكفة: '.tr()||text== 'من مركز التلكفة: '.tr()
+                                                            ? const SizedBox()
+                                                            : CustomText(
+                                                            text: '01021424949',
+                                                            fontWeight: FontWeight.w600,
+                                                            fontSize: ScreenUtil()
+                                                                .orientation ==
+                                                                Orientation.landscape
+                                                                ? 6.sp
+                                                                : 13.sp,
+                                                            color: Colors.black)
+                                                      ],
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    )
+                                )),
+                          );
+                        });
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.yellow,
+                        borderRadius:
+                        BorderRadiusDirectional.circular(
+                            8.r)),
+                    child: Padding(
+                        padding: EdgeInsets.symmetric(
+                            vertical: 5.h, horizontal: 5.w),
+                        child: const Icon(Icons.search,
+                            color: Colors.black)),
+                  ),
+                )
+              ],
+            )
+          ],
+        ));
+  }
   @override
   Widget build(BuildContext context) {
 
@@ -612,7 +1050,7 @@ customRow4(text, hint, isSearch, context) {
       'ملاحظات: '.tr(),
       'مستلم المفتاح الاحتياطى: '.tr(),
       'مكان المفتاح الاحتياطى: '.tr(),
-      'تاريخ الاستراجع المتوقع: '.tr(),
+      'تاريخ الاسترجاع المتوقع: '.tr(),
       'أيام التأخير: '.tr(),
     ];
     List<Widget> items = List.generate(

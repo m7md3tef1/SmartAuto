@@ -291,7 +291,7 @@ class _SmartAutoLoginScreenState extends State<SmartAutoLoginScreen> {
                                     ],
                                   ),
                                 ),
-                                Row(
+                                Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
@@ -348,6 +348,7 @@ class _SmartAutoLoginScreenState extends State<SmartAutoLoginScreen> {
                                               );
                                       },
                                     ),
+                                    SizedBox(height: 20.h),
                                     GestureDetector(
                                       onTap: () async {
                                         bool available =
@@ -401,7 +402,7 @@ class _SmartAutoLoginScreenState extends State<SmartAutoLoginScreen> {
                                             color: Colors.yellow),
                                         child: Row(
                                             mainAxisAlignment:
-                                                MainAxisAlignment.start,
+                                                MainAxisAlignment.center,
                                             children: [
                                               SizedBox(width: 15.w),
                                               SmartAutoLoginCubit.get(context)

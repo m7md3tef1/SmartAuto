@@ -22,7 +22,7 @@ Color chooseToastColor(ToastedStates states) {
   Color color;
   switch (states) {
     case ToastedStates.SUCCESS:
-      color = Colors.yellow;
+      color = Colors.green;
       break;
     case ToastedStates.ERROR:
       color = Colors.red;

@@ -29,6 +29,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   void initState() {
     HomeCubit.get(context).getListPlateEN();
+    HomeCubit.get(context).getListCostAR();
     super.initState();
   }
 

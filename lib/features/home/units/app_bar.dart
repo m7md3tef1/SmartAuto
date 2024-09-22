@@ -167,10 +167,6 @@ customDialogShowUsers(context, text) {
                               itemBuilder: (context, index) {
                                 return InkWell(
                                   onTap: () {
-                                    // text == 'رقم اللوحة: '.tr()
-                                    //     ? (getPlate =
-                                    //         HomeCubit.get(context).getPlate)
-                                    //     :
                                     text == 'رقم اللوحة: '.tr()
                                         ? {
                                             setState(() {
