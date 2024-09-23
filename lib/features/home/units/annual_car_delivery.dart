@@ -1075,44 +1075,37 @@ class _AnnualDeliveringCarState extends State<AnnualDeliveringCar> {
                   :(){},
                   child: SizedBox(
                     width: 150.w,
-                    child: TextFormField(
-                      enabled:text=='تاريخ الاسترجاع المتوقع: '.tr()||text=='تاريخ الحركة: '.tr()||text=='رقم الحركة: '.tr()? false:true,
-                      decoration: InputDecoration(
-                          errorStyle: TextStyle(
-                              fontFamily: 'tj',
-                              color: Colors.red,
-                              fontSize: ScreenUtil().orientation ==
-                                  Orientation.landscape
-                                  ? 10.sp
-                                  : 12.sp),
-                          contentPadding: const EdgeInsets.fromLTRB(
-                              0.0, 12.0, 0.0, 0.0),
-                          hintText:
-                          ' ${
-                              text=='رقم الحركة: '.tr()? (HomeCubit.get(context).GetMaxKey??''):text=='تاريخ الاسترجاع المتوقع: '.tr()? (date1??''):text=='تاريخ الحركة: '.tr()?(date2??''):''}',
-                          hintStyle: const TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.w700),
-                          filled: true,
-                          fillColor: Colors.white,
-                          disabledBorder: OutlineInputBorder(
-                              borderRadius:
-                              BorderRadius.circular(10.r),
-                              borderSide: const BorderSide(
-                                  color: Colors.black54)),enabledBorder: OutlineInputBorder(
-                              borderRadius:
-                              BorderRadius.circular(10.r),
-                              borderSide: const BorderSide(
-                                  color: Colors.black54)),
-
-                          border: OutlineInputBorder(
-                              borderRadius:
-                              BorderRadius.circular(10.r),
-                              borderSide: BorderSide(
-                                  color: Colors.black54,
-                                  width: .1.w,
-                                  style: BorderStyle.solid)),
-                          suffixIconColor: Colors.black),
+                    child: BlocConsumer<HomeCubit, HomeState>(
+                      listener: (context, state) {},
+                      builder: (context, state) {
+                        if(state is GetMaxKeySuccess){
+                          HomeCubit.get(context).GetMaxKey;
+                        }
+                        return TextFormField(
+                          enabled:text=='تاريخ الاسترجاع المتوقع: '.tr()||text=='تاريخ الحركة: '.tr()||text=='رقم الحركة: '.tr()? false:true,
+                          decoration: InputDecoration(
+                              errorStyle: TextStyle(
+                                  fontFamily: 'tj',
+                                  color: Colors.red,
+                                  fontSize: ScreenUtil().orientation ==
+                                      Orientation.landscape ? 10.sp : 12.sp),
+                              contentPadding: const EdgeInsets.fromLTRB(0.0, 12.0, 0.0, 0.0),
+                              hintText: ' ${text=='رقم الحركة: '.tr()? (HomeCubit.get(context).GetMaxKey??''):text=='تاريخ الاسترجاع المتوقع: '.tr()? (date1??''):text=='تاريخ الحركة: '.tr()?(date2??''):''}',
+                              hintStyle: const TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w700),
+                              filled: true,
+                              fillColor: Colors.white,
+                              disabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.r),
+                                  borderSide: const BorderSide(
+                                      color: Colors.black54)),enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.r),
+                              borderSide: const BorderSide(color: Colors.black54)),
+                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.r),
+                                  borderSide: BorderSide(color: Colors.black54, width: .1.w, style: BorderStyle.solid)),
+                              suffixIconColor: Colors.black)
+                        );},
                     ),
                   ),
                 ),
