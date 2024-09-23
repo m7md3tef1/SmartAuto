@@ -23,8 +23,14 @@ class _AnnualPickupCarState extends State<AnnualPickupCar> {
   var date;
   var date1;
   var date2;
+  TextEditingController? Notes=TextEditingController();
+  TextEditingController? curCntr=TextEditingController();
+  TextEditingController? prvCntr=TextEditingController();
   var time;
   var cost1;
+  var employeeCar;
+  var employeePin;
+  var employeePin1;
   var cost2;
   customRow1(text, hint, isSearch, context) {
     return Padding(
@@ -308,6 +314,17 @@ class _AnnualPickupCarState extends State<AnnualPickupCar> {
                             text == 'الموظف: '.tr()
                                 ? (employee == null ? '' : employee['Emp_Code'])
                                 :
+
+                            text == 'مستخدم السيارة: '.tr()
+                                ? (employeeCar == null ? '' : employeeCar['Emp_Code'])
+                                :
+                            text == 'مستلم المفتاح: '.tr()
+                                ? (employeePin == null ? '' : employeePin['Emp_Code'])
+                                :
+                            text == 'مستلم المفتاح الاحتياطى: '.tr()
+                                ? (employeePin1 == null ? '' : employeePin1['Emp_Code'])
+                                :
+
                             text == 'من مركز التلكفة: '.tr()
                                 ? (cost1 == null ? '' : cost1['CST_No'])
                                 :
@@ -381,7 +398,7 @@ class _AnnualPickupCarState extends State<AnnualPickupCar> {
                                                     :
                                                 text == 'العميل: '.tr() ? 'العملاء'.tr()
                                                     :
-                                                text == 'الموظف: '.tr() ? 'الموظفين'.tr()
+                                                text == 'مستلم المفتاح الاحتياطى: '.tr()  || text == 'الموظف: '.tr()  ||text == 'مستخدم السيارة: '.tr()||text == 'مستلم المفتاح: '.tr() ? 'الموظفين'.tr()
                                                     :
                                                 text == 'رقم العقد: '.tr() ? 'العقود'.tr()
                                                     :
@@ -442,7 +459,7 @@ class _AnnualPickupCarState extends State<AnnualPickupCar> {
                                                           text: text == 'رقم اللوحة: '.tr()
                                                               ? "رقم اللوحة".tr()
                                                               :
-                                                          text == 'الموظف: '.tr()||text == 'رقم العقد: '.tr()||text == 'الى مركز التلكفة: '.tr()||  text == 'العميل: '.tr()||text== 'من مركز التلكفة: '.tr()||text=='من مكان: '.tr()||text== 'الى مكان: '.tr()
+                                                          text == 'مستلم المفتاح الاحتياطى: '.tr()  || text == 'الموظف: '.tr()  ||text == 'مستخدم السيارة: '.tr()||text == 'مستلم المفتاح: '.tr() ||text == 'رقم العقد: '.tr()||text == 'الى مركز التلكفة: '.tr()||  text == 'العميل: '.tr()||text== 'من مركز التلكفة: '.tr()||text=='من مكان: '.tr()||text== 'الى مكان: '.tr()
                                                               ? "الكود".tr()
                                                               : 'كود الموظف'.tr(),
                                                           fontWeight: FontWeight.bold,
@@ -489,7 +506,7 @@ class _AnnualPickupCarState extends State<AnnualPickupCar> {
                                                     ?const SizedBox():
                                                 text == 'رقم العقد: '.tr() &&HomeCubit.get(context).GetListContract==null
                                                     ?const SizedBox():
-                                                text == 'الموظف: '.tr() &&HomeCubit.get(context).GetListEmployee==null
+                                                (text == 'مستلم المفتاح الاحتياطى: '.tr()  || text == 'الموظف: '.tr()  ||text == 'مستخدم السيارة: '.tr()||text == 'مستلم المفتاح: '.tr() ) &&HomeCubit.get(context).GetListEmployee==null
                                                     ?const SizedBox():
                                                 text == 'العميل: '.tr() &&HomeCubit.get(context).GetListCustomer==null
                                                     ?const SizedBox():
@@ -505,7 +522,7 @@ class _AnnualPickupCarState extends State<AnnualPickupCar> {
                                                   text == 'رقم اللوحة: '.tr()
                                                       ? HomeCubit.get(context).GetListPlate!.length
                                                       :
-                                                  text == 'الموظف: '.tr()
+                                                  text == 'مستلم المفتاح الاحتياطى: '.tr()  || text == 'الموظف: '.tr()  ||text == 'مستخدم السيارة: '.tr()||text == 'مستلم المفتاح: '.tr()
                                                       ? HomeCubit.get(context).GetListEmployee!.length
                                                       :
                                                   text == 'رقم العقد: '.tr()
@@ -541,6 +558,8 @@ class _AnnualPickupCarState extends State<AnnualPickupCar> {
                                                           }),
                                                         }
                                                             :
+
+
                                                         text == 'الموظف: '.tr()
                                                             ? {
                                                           setState(() {
@@ -548,7 +567,30 @@ class _AnnualPickupCarState extends State<AnnualPickupCar> {
                                                             MagicRouter.pop();
                                                           }),
                                                         }
-                                                            : text == 'العميل: '.tr()
+                                                            :
+                                                        text == 'مستخدم السيارة: '.tr()
+                                                            ? {
+                                                          setState(() {
+                                                            employeeCar = HomeCubit.get(context).GetListEmployee[index];
+                                                            MagicRouter.pop();
+                                                          }),
+                                                        }
+                                                            : text == 'مستلم المفتاح: '.tr()
+                                                            ? {
+                                                          setState(() {
+                                                            employeePin = HomeCubit.get(context).GetListEmployee[index];
+                                                            MagicRouter.pop();
+                                                          }),
+                                                        }
+                                                            : text == 'مستلم المفتاح الاحتياطى: '.tr()
+                                                            ? {
+                                                          setState(() {
+                                                            employeePin1 = HomeCubit.get(context).GetListEmployee[index];
+                                                            MagicRouter.pop();
+                                                          }),
+                                                        }
+                                                            :
+                                                        text == 'العميل: '.tr()
                                                             ? {
                                                           setState(() {
                                                             customer = HomeCubit.get(context).GetListCustomer[index];
@@ -681,6 +723,10 @@ class _AnnualPickupCarState extends State<AnnualPickupCar> {
                 SizedBox(
                   width: 205.w,
                   child: TextFormField( enabled: false,
+                    controller: text == 'ملاحظات: '.tr()? Notes:
+                    text == 'قراءة العداد الحالية: '?curCntr:
+                    text == 'قراءة العداد السابقة: '.tr()?prvCntr:
+                    null,
                     decoration: InputDecoration(
                         errorStyle: TextStyle(
                             fontFamily: 'tj',
@@ -701,6 +747,12 @@ class _AnnualPickupCarState extends State<AnnualPickupCar> {
                             ? (customer == null ? '' : (customer['DSCR']))
                             : text == 'الموظف: '.tr()
                             ? (employee == null ? '' : (employee['Emp_NM']))
+                            : text == 'مستخدم السيارة: '.tr()
+                            ? (employeeCar == null ? '' : (employeeCar['Emp_NM']))
+                            :  text == 'مستلم المفتاح الاحتياطى: '.tr()
+                            ? (employeePin == null ? '' : (employeePin['Emp_NM']))
+                            :  text == 'مستلم المفتاح: '.tr()
+                            ? (employeePin1 == null ? '' : (employeePin1['Emp_NM']))
                             : text == 'رقم العقد: '.tr()
                             ? (contract == null ? '' : (contract['Stat_Nm']))
                             : text == 'من مكان: '.tr()
@@ -1214,21 +1266,40 @@ class _AnnualPickupCarState extends State<AnnualPickupCar> {
                           ),
                           SizedBox(width: 10.w),
                           Expanded(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.yellow,
-                                borderRadius:
-                                    BorderRadiusDirectional.circular(20.r),
-                              ),
-                              child: Center(
-                                child: Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 10.h, horizontal: 12.w),
-                                  child: CustomText(
-                                      text: 'حفظ'.tr(),
-                                      fontSize: 18.sp,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold),
+                            child: InkWell(
+                              onTap: (){
+                                // print(date2);
+                                HomeCubit.get(context).add(
+                                    HomeCubit.get(context).GetMaxKey,
+                                    date2,
+                                    prvCntr!.text,
+                                    curCntr!.text,
+                                    (contract==null?null:contract['Prj_No']),
+                                    (customer==null?null:customer['Cust_No']),
+                                    date,
+                                    time,
+                                    Notes!.text,
+                                    "rcempCode",
+                                    (employee==null?null:employee['Emp_Code']),
+                                    (plate==null?null:plate['Plate_No']),
+                                    context);
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.yellow,
+                                  borderRadius:
+                                  BorderRadiusDirectional.circular(20.r),
+                                ),
+                                child: Center(
+                                  child: Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 10.h, horizontal: 12.w),
+                                    child: CustomText(
+                                        text: 'حفظ'.tr(),
+                                        fontSize: 18.sp,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold),
+                                  ),
                                 ),
                               ),
                             ),
