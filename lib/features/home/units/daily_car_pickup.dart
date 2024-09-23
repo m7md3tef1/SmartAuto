@@ -15,6 +15,9 @@ class DailyPickupCar extends StatefulWidget {
 class _DailyPickupCarState extends State<DailyPickupCar> {
 
   var plate;
+  var employee;
+  var contract;
+  var customer;
   var place1;
   var place2;
   var date;
@@ -23,8 +26,7 @@ class _DailyPickupCarState extends State<DailyPickupCar> {
   var time;
   var cost1;
   var cost2;
-
-  customRow1(text, hint, isSearch, context){
+  customRow1(text, hint, isSearch, context) {
     return Padding(
         padding: const EdgeInsets.only(top: 2.0, bottom: 2, left: 8, right: 8),
         child:
@@ -262,287 +264,6 @@ class _DailyPickupCarState extends State<DailyPickupCar> {
                     ],
                   ))
             ])
-        //     :text ==  'من مكان: '.tr() ||text == 'الى مكان: '.tr()?
-        // Row(
-        //   crossAxisAlignment: CrossAxisAlignment.center,
-        //   mainAxisAlignment: MainAxisAlignment.start,
-        //   children: [
-        //     SizedBox(
-        //       width: 150.w,
-        //       child: CustomText(
-        //           align: TextAlign.end,
-        //           text: text,
-        //           line: 2,
-        //           color: Colors.black,
-        //           fontSize: 18.sp,
-        //           fontWeight: FontWeight.bold),
-        //     ),
-        //     SizedBox(width: 5.w),
-        //     Row(
-        //       children: [
-        //         SizedBox(
-        //           width: 150.w,
-        //           child: TextFormField(
-        //             decoration: InputDecoration(
-        //                 errorStyle: TextStyle(
-        //                     fontFamily: 'tj',
-        //                     color: Colors.red,
-        //                     fontSize: ScreenUtil().orientation == Orientation.landscape
-        //                         ? 10.sp
-        //                         : 12.sp),
-        //                 contentPadding: const EdgeInsets.fromLTRB(
-        //                     0.0, 12.0, 0.0, 0.0),
-        //                 hintText: text == 'رقم اللوحة: '.tr()
-        //                     ? (plate == null
-        //                     ? ''
-        //                     : plate['Plate_No'])
-        //                     : '',
-        //                 hintStyle: const TextStyle(
-        //                     color: Colors.grey,
-        //                     fontWeight: FontWeight.w700),
-        //                 filled: true,
-        //                 fillColor: Colors.white,
-        //                 disabledBorder: OutlineInputBorder(
-        //                       borderRadius:
-        //                       BorderRadius.circular(10.r),
-        //                       borderSide: const BorderSide(
-        //                           color: Colors.black54)),enabledBorder: OutlineInputBorder(
-        //                     borderRadius:
-        //                     BorderRadius.circular(10.r),
-        //                     borderSide: const BorderSide(
-        //                         color: Colors.black54)),
-        //                 border: OutlineInputBorder(
-        //                     borderRadius: BorderRadius.circular(10.r),
-        //                     borderSide: BorderSide(color: Colors.black54, width: .1.w, style: BorderStyle.solid)),
-        //                 suffixIconColor: Colors.black),
-        //           ),
-        //         ),
-        //         SizedBox(width: 5.w),
-        //         isSearch == null
-        //             ? const SizedBox()
-        //             : InkWell(
-        //           onTap: () {
-        //             showDialog(
-        //                 useRootNavigator: false,
-        //                 context: context,
-        //                 builder: (dialogContext) {
-        //                   return SizedBox(
-        //                     height: 500.h,
-        //                     width: 1.sw,
-        //                     child: AlertDialog(
-        //                         titlePadding: EdgeInsets.only(
-        //                             left: 10.w, right: 10.w, top: 10.h, bottom: 10.h),
-        //                         contentPadding: EdgeInsets.only(left: 0.w, right: 0.w, top: 10.h),
-        //                         insetPadding:
-        //                         EdgeInsets.symmetric(vertical: 5.h, horizontal: 10.w),
-        //                         actionsPadding:
-        //                         EdgeInsets.symmetric(horizontal: 0.w, vertical: 16.h),
-        //                         clipBehavior: Clip.antiAliasWithSaveLayer,
-        //                         backgroundColor: const Color(0xFFFAFAFA),
-        //                         surfaceTintColor: Colors.grey,
-        //                         shadowColor: Colors.grey,
-        //                         shape: RoundedRectangleBorder(
-        //                             side: BorderSide(color: const Color(0xFFD6CECE), width: 1.w),
-        //                             borderRadius: BorderRadius.all(Radius.circular(15.r))),
-        //                         title: Row(
-        //                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //                           children: [
-        //                             CustomText(
-        //                                 text: 'نافذه استعلاميه عن الموظفين'.tr(),
-        //                                 fontWeight: FontWeight.bold,
-        //                                 fontSize:
-        //                                 ScreenUtil().orientation == Orientation.landscape
-        //                                     ? 8.sp
-        //                                     : 23.sp,
-        //                                 color: Colors.black),
-        //                             InkWell(
-        //                                 onTap: () {
-        //                                   MagicRouter.pop();
-        //                                 },
-        //                                 child: Container(
-        //                                     decoration: BoxDecoration(
-        //                                         borderRadius: BorderRadius.circular(20.r),
-        //                                         color: Colors.red),
-        //                                     child: Icon(Icons.close,
-        //                                         color: Colors.white, size: 20.w)))
-        //                           ],
-        //                         ),
-        //                         content: SizedBox(
-        //                             height: .5.sh,
-        //                             width: 1.sw,
-        //                             child:
-        //                             // StatefulBuilder(
-        //                             //                                       builder: (context, setState) {
-        //                             //                                         return
-        //                             Column(
-        //                               children: [
-        //                                 Padding(
-        //                                   padding: EdgeInsetsDirectional.only(
-        //                                       start: 4.w, end: 4.w, bottom: 5.h),
-        //                                   child: Container(
-        //                                     decoration: BoxDecoration(
-        //                                         color: Colors.yellow,
-        //                                         borderRadius:
-        //                                         BorderRadiusDirectional.circular(5.r)),
-        //                                     child: Padding(
-        //                                       padding: EdgeInsetsDirectional.only(
-        //                                           start: 2.w, end: 2.w, bottom: 5.h),
-        //                                       child: Row(
-        //                                         mainAxisAlignment:
-        //                                         MainAxisAlignment.spaceBetween,
-        //                                         children: [
-        //                                           CustomText(
-        //                                               text: text == 'رقم اللوحة: '.tr()
-        //                                                   ? "رقم اللوحة".tr()
-        //                                                   : 'كود الموظف'.tr(),
-        //                                               fontWeight: FontWeight.bold,
-        //                                               fontSize: ScreenUtil().orientation ==
-        //                                                   Orientation.landscape
-        //                                                   ? 8.sp
-        //                                                   : 13.sp,
-        //                                               color: Colors.black),
-        //                                           CustomText(
-        //                                               text: text == 'رقم اللوحة: '.tr()
-        //                                                   ? "الوصف".tr()
-        //                                                   : 'اسم الموظف'.tr(),
-        //                                               fontWeight: FontWeight.bold,
-        //                                               fontSize: ScreenUtil().orientation ==
-        //                                                   Orientation.landscape
-        //                                                   ? 8.sp
-        //                                                   : 13.sp,
-        //                                               color: Colors.black),
-        //                                           text == 'رقم اللوحة: '.tr()
-        //                                               ? const SizedBox()
-        //                                               : CustomText(
-        //                                               text: 'رقم التليفون'.tr(),
-        //                                               fontWeight: FontWeight.bold,
-        //                                               fontSize: ScreenUtil().orientation ==
-        //                                                   Orientation.landscape
-        //                                                   ? 8.sp
-        //                                                   : 13.sp,
-        //                                               color: Colors.black)
-        //                                         ],
-        //                                       ),
-        //                                     ),
-        //                                   ),
-        //                                 ),
-        //                                 Expanded(
-        //                                   child: SingleChildScrollView(
-        //                                     child: ListView.builder(
-        //                                       shrinkWrap: true,
-        //                                       padding: EdgeInsets.zero,
-        //                                       itemCount:
-        //                                       // text == 'رقم اللوحة: '.tr()
-        //                                       // ? HomeCubit.get(context).getPlate.length:
-        //                                       text == 'رقم اللوحة: '.tr()
-        //                                           ? HomeCubit.get(context)
-        //                                           .GetListPlateEN!
-        //                                           .length
-        //                                           : 3,
-        //                                       scrollDirection: Axis.vertical,
-        //                                       physics: const BouncingScrollPhysics(),
-        //                                       itemBuilder: (context, index) {
-        //                                         return InkWell(
-        //                                           onTap: () {
-        //                                             // text == 'رقم اللوحة: '.tr()
-        //                                             //     ? (getPlate =
-        //                                             //         HomeCubit.get(context).getPlate)
-        //                                             //     :
-        //                                             text == 'رقم اللوحة: '.tr()
-        //                                                 ? {
-        //
-        //                                               setState(() {
-        //                                                 plate ==
-        //                                                     HomeCubit.get(context)
-        //                                                         .GetListPlateEN[index];
-        //                                                 plate =
-        //                                                 HomeCubit.get(context)
-        //                                                     .GetListPlateEN[index];
-        //                                                 print("plate==== $plate");
-        //                                                 MagicRouter.pop();
-        //                                               }),
-        //                                             }
-        //                                                 : '';
-        //                                           },
-        //                                           child: Padding(
-        //                                             padding: EdgeInsetsDirectional.only(
-        //                                                 start: 5.w, end: 5.w, bottom: 5.h),
-        //                                             child: Row(
-        //                                               mainAxisAlignment:
-        //                                               MainAxisAlignment.spaceBetween,
-        //                                               children: [
-        //                                                 CustomText(
-        //                                                     text: text == 'رقم اللوحة: '.tr()
-        //                                                         ? HomeCubit.get(context)
-        //                                                         .GetListPlateEN[index]
-        //                                                     ['Plate_No']
-        //                                                         : '123',
-        //                                                     fontWeight: FontWeight.w600,
-        //                                                     fontSize:
-        //                                                     ScreenUtil().orientation ==
-        //                                                         Orientation.landscape
-        //                                                         ? 6.sp
-        //                                                         : 13.sp,
-        //                                                     color: Colors.black),
-        //                                                 CustomText(
-        //                                                     text: text == 'رقم اللوحة: '.tr()
-        //                                                         ? HomeCubit.get(context)
-        //                                                         .GetListPlateEN[index]
-        //                                                     ['fa_DSC_En']
-        //                                                         .toString()
-        //                                                         : 'محمد عاطف',
-        //                                                     fontWeight: FontWeight.w600,
-        //                                                     fontSize:
-        //                                                     ScreenUtil().orientation ==
-        //                                                         Orientation.landscape
-        //                                                         ? 6.sp
-        //                                                         : 13.sp,
-        //                                                     color: Colors.black),
-        //                                                 text == 'رقم اللوحة: '.tr()
-        //                                                     ? const SizedBox()
-        //                                                     : CustomText(
-        //                                                     text: '01021424949',
-        //                                                     fontWeight: FontWeight.w600,
-        //                                                     fontSize: ScreenUtil()
-        //                                                         .orientation ==
-        //                                                         Orientation.landscape
-        //                                                         ? 6.sp
-        //                                                         : 13.sp,
-        //                                                     color: Colors.black)
-        //                                               ],
-        //                                             ),
-        //                                           ),
-        //                                         );
-        //                                       },
-        //                                     ),
-        //                                   ),
-        //                                 )
-        //                               ],
-        //                             )
-        //                           //   },
-        //                           // ),
-        //                         )),
-        //                   );
-        //                 });
-        //           },
-        //           child: Container(
-        //             decoration: BoxDecoration(
-        //                 color: Colors.yellow,
-        //                 borderRadius:
-        //                 BorderRadiusDirectional
-        //                     .circular(8.r)),
-        //             child: Padding(
-        //                 padding: EdgeInsets.symmetric(
-        //                     vertical: 5.h,
-        //                     horizontal: 5.w),
-        //                 child: const Icon(Icons.search,
-        //                     color: Colors.black)),
-        //           ),
-        //         )
-        //       ],
-        //     )
-        //   ],
-        // )
             : isSearch == 'Column' ?
         Column(
           children: [
@@ -576,29 +297,28 @@ class _DailyPickupCarState extends State<DailyPickupCar> {
                             contentPadding: const EdgeInsets.fromLTRB(
                                 0.0, 12.0, 0.0, 0.0),
                             hintText: ' ${text == 'رقم اللوحة: '.tr()
-                                ? (plate == null
-                                ? ''
-                                : plate['Plate_No'])
+                                ? (plate == null ? '' : plate['Plate_No'])
+                                :
+                            text == 'العميل: '.tr()
+                                ? (customer == null ? '' : customer['Cust_No'])
+                                :
+                            text == 'رقم العقد: '.tr()
+                                ? (contract == null ? '' : contract['Prj_No'])
+                                :
+                            text == 'الموظف: '.tr()
+                                ? (employee == null ? '' : employee['Emp_Code'])
                                 :
                             text == 'من مركز التلكفة: '.tr()
-                                ? (cost1 == null
-                                ? ''
-                                : cost1['CST_No'])
+                                ? (cost1 == null ? '' : cost1['CST_No'])
                                 :
                             text == 'الى مركز التلكفة: '.tr()
-                                ? (cost2 == null
-                                ? ''
-                                : cost2['CST_No'])
+                                ? (cost2 == null ? '' : cost2['CST_No'])
                                 :
                             text == 'من مكان: '.tr()
-                                ? (place1 == null
-                                ? ''
-                                : place1['Sub_Code'])
+                                ? (place1 == null ? '' : place1['Sub_Code'])
                                 :
                             text == 'الى مكان: '.tr()
-                                ? (place2 == null
-                                ? ''
-                                : place2['Sub_Code'])
+                                ? (place2 == null ? '' : place2['Sub_Code'])
                                 : ''}',
                             hintStyle: const TextStyle(
                                 color: Colors.black,
@@ -656,12 +376,19 @@ class _DailyPickupCarState extends State<DailyPickupCar> {
                                           crossAxisAlignment: CrossAxisAlignment.center,
                                           children: [
                                             CustomText(
-                                                text: text == 'رقم اللوحة: '.tr()?
-                                                'نافذه استعلاميه عن اللوحات'.tr():
-                                                text=='من مكان: '.tr()||text== 'الى مكان: '.tr()?
-                                                "الأماكن".tr():
-                                                text == 'من مركز التلكفة: '.tr()|| text == 'الى مركز التلكفة: '.tr()?
-                                                'نافذه استعلاميه عن مراكز التلكفة'.tr():
+                                                text:
+                                                text == 'رقم اللوحة: '.tr() ? 'نافذه استعلاميه عن اللوحات'.tr()
+                                                    :
+                                                text == 'العميل: '.tr() ? 'العملاء'.tr()
+                                                    :
+                                                text == 'الموظف: '.tr() ? 'الموظفين'.tr()
+                                                    :
+                                                text == 'رقم العقد: '.tr() ? 'العقود'.tr()
+                                                    :
+                                                text=='من مكان: '.tr()||text== 'الى مكان: '.tr() ? "الأماكن".tr()
+                                                    :
+                                                text == 'من مركز التلكفة: '.tr()|| text == 'الى مركز التلكفة: '.tr()? 'نافذه استعلاميه عن مراكز التلكفة'.tr()
+                                                    :
                                                 'نافذه استعلاميه عن الموظفين'.tr(),
                                                 fontWeight: FontWeight.bold,
                                                 fontSize:
@@ -715,7 +442,7 @@ class _DailyPickupCarState extends State<DailyPickupCar> {
                                                           text: text == 'رقم اللوحة: '.tr()
                                                               ? "رقم اللوحة".tr()
                                                               :
-                                                          text == 'الى مركز التلكفة: '.tr()||text== 'من مركز التلكفة: '.tr()||text=='من مكان: '.tr()||text== 'الى مكان: '.tr()
+                                                          text == 'الموظف: '.tr()||text == 'رقم العقد: '.tr()||text == 'الى مركز التلكفة: '.tr()||  text == 'العميل: '.tr()||text== 'من مركز التلكفة: '.tr()||text=='من مكان: '.tr()||text== 'الى مكان: '.tr()
                                                               ? "الكود".tr()
                                                               : 'كود الموظف'.tr(),
                                                           fontWeight: FontWeight.bold,
@@ -725,10 +452,14 @@ class _DailyPickupCarState extends State<DailyPickupCar> {
                                                               : 13.sp,
                                                           color: Colors.black),
                                                       CustomText(
-                                                          text: text == 'رقم اللوحة: '.tr() || text == 'الى مركز التلكفة: '.tr()||text== 'من مركز التلكفة: '.tr()
+                                                          text:
+                                                          text == 'رقم اللوحة: '.tr() || text == 'الى مركز التلكفة: '.tr()||text== 'من مركز التلكفة: '.tr()
                                                               ? "الوصف".tr():
-                                                          text=='من مكان: '.tr()||text== 'الى مكان: '.tr()?
-                                                          'الإسم'.tr()
+                                                          text=='من مكان: '.tr()||   text == 'العميل: '.tr()||text== 'الى مكان: '.tr()
+                                                              ? 'الإسم'.tr()
+                                                              :
+                                                          text == 'رقم العقد: '.tr()
+                                                              ? 'الحاله'.tr()
                                                               : 'اسم الموظف'.tr(),
                                                           fontWeight: FontWeight.bold,
                                                           fontSize: ScreenUtil().orientation ==
@@ -736,16 +467,16 @@ class _DailyPickupCarState extends State<DailyPickupCar> {
                                                               ? 8.sp
                                                               : 13.sp,
                                                           color: Colors.black),
-                                                      text=='من مكان: '.tr()||text== 'الى مكان: '.tr()||   text == 'رقم اللوحة: '.tr()|| text == 'الى مركز التلكفة: '.tr()||text== 'من مركز التلكفة: '.tr()
-                                                          ? const SizedBox()
-                                                          : CustomText(
-                                                          text: 'رقم التليفون'.tr(),
-                                                          fontWeight: FontWeight.bold,
-                                                          fontSize: ScreenUtil().orientation ==
-                                                              Orientation.landscape
-                                                              ? 8.sp
-                                                              : 13.sp,
-                                                          color: Colors.black)
+                                                      // text == 'العميل: '.tr()||text == 'العميل: '.tr()|| text=='من مكان: '.tr()||text== 'الى مكان: '.tr()||   text == 'رقم اللوحة: '.tr()|| text == 'الى مركز التلكفة: '.tr()||text== 'من مركز التلكفة: '.tr()
+                                                      //     ? const SizedBox()
+                                                      //     : CustomText(
+                                                      //     text: 'رقم التليفون'.tr(),
+                                                      //     fontWeight: FontWeight.bold,
+                                                      //     fontSize: ScreenUtil().orientation ==
+                                                      //         Orientation.landscape
+                                                      //         ? 8.sp
+                                                      //         : 13.sp,
+                                                      //     color: Colors.black)
                                                     ],
                                                   ),
                                                 ),
@@ -755,6 +486,12 @@ class _DailyPickupCarState extends State<DailyPickupCar> {
                                               child: SingleChildScrollView(
                                                 child:
                                                 text == 'رقم اللوحة: '.tr() &&HomeCubit.get(context).GetListPlate==null
+                                                    ?const SizedBox():
+                                                text == 'رقم العقد: '.tr() &&HomeCubit.get(context).GetListContract==null
+                                                    ?const SizedBox():
+                                                text == 'الموظف: '.tr() &&HomeCubit.get(context).GetListEmployee==null
+                                                    ?const SizedBox():
+                                                text == 'العميل: '.tr() &&HomeCubit.get(context).GetListCustomer==null
                                                     ?const SizedBox():
                                                 ( text=='من مكان: '.tr()||text== 'الى مكان: '.tr()) &&HomeCubit.get(context).GetListPlace==null
                                                     ?const SizedBox():
@@ -766,19 +503,22 @@ class _DailyPickupCarState extends State<DailyPickupCar> {
                                                   padding: EdgeInsets.zero,
                                                   itemCount:
                                                   text == 'رقم اللوحة: '.tr()
-                                                      ? HomeCubit.get(context)
-                                                      .GetListPlate!
-                                                      .length
+                                                      ? HomeCubit.get(context).GetListPlate!.length
+                                                      :
+                                                  text == 'الموظف: '.tr()
+                                                      ? HomeCubit.get(context).GetListEmployee!.length
+                                                      :
+                                                  text == 'رقم العقد: '.tr()
+                                                      ? HomeCubit.get(context).GetListContract!.length
+                                                      :
+                                                  text == 'العميل: '.tr()
+                                                      ? HomeCubit.get(context).GetListCustomer.length
                                                       :
                                                   text=='من مكان: '.tr()||text== 'الى مكان: '.tr()
-                                                      ? HomeCubit.get(context)
-                                                      .GetListPlace!
-                                                      .length
+                                                      ? HomeCubit.get(context).GetListPlace!.length
                                                       :
                                                   text == 'الى مركز التلكفة: '.tr()||text== 'من مركز التلكفة: '.tr()
-                                                      ? HomeCubit.get(context)
-                                                      .GetListCost!
-                                                      .length
+                                                      ? HomeCubit.get(context).GetListCost!.length
                                                       : 3,
                                                   scrollDirection: Axis.vertical,
                                                   physics: const BouncingScrollPhysics(),
@@ -788,62 +528,52 @@ class _DailyPickupCarState extends State<DailyPickupCar> {
                                                         text == 'رقم اللوحة: '.tr()
                                                             ? {
                                                           setState(() {
-                                                            plate ==
-                                                                HomeCubit.get(context)
-                                                                    .GetListPlate[index];
-                                                            plate =
-                                                            HomeCubit.get(context)
-                                                                .GetListPlate[index];
-                                                            MagicRouter.pop();
-                                                          }),
-                                                        }:
-                                                        text=='من مكان: '.tr()
-                                                            ? {
-                                                          setState(() {
-                                                            place1 ==
-                                                                HomeCubit.get(context)
-                                                                    .GetListPlace[index];
-                                                            place1 =
-                                                            HomeCubit.get(context)
-                                                                .GetListPlace[index];
-                                                            MagicRouter.pop();
-                                                          }),
-                                                        }:
-                                                        text== 'الى مكان: '.tr()
-                                                            ? {
-                                                          setState(() {
-                                                            place2 ==
-                                                                HomeCubit.get(context)
-                                                                    .GetListPlace[index];
-                                                            place2 =
-                                                            HomeCubit.get(context)
-                                                                .GetListPlace[index];
-                                                            MagicRouter.pop();
-                                                          }),
-                                                        }: text == 'الى مركز التلكفة: '.tr()
-                                                            ? {
-                                                          setState(() {
-                                                            cost2 ==
-                                                                HomeCubit.get(context)
-                                                                    .GetListCost[index];
-                                                            cost2 =
-                                                            HomeCubit.get(context)
-                                                                .GetListCost[index];
+                                                            plate = HomeCubit.get(context).GetListPlate[index];
                                                             MagicRouter.pop();
                                                           }),
                                                         }
+                                                            :
+                                                        text == 'رقم العقد: '.tr()
+                                                            ? {
+                                                          setState(() {
+                                                            contract = HomeCubit.get(context).GetListContract[index];
+                                                            MagicRouter.pop();
+                                                          }),
+                                                        }
+                                                            :
+                                                        text == 'الموظف: '.tr()
+                                                            ? {
+                                                          setState(() {
+                                                            employee = HomeCubit.get(context).GetListEmployee[index];
+                                                            MagicRouter.pop();
+                                                          }),
+                                                        }
+                                                            : text == 'العميل: '.tr()
+                                                            ? {
+                                                          setState(() {
+                                                            customer = HomeCubit.get(context).GetListCustomer[index];
+                                                            MagicRouter.pop();
+                                                          }),}
+                                                            : text=='من مكان: '.tr()
+                                                            ? {
+                                                          setState(() {
+                                                            place1 = HomeCubit.get(context).GetListPlace[index];
+                                                            MagicRouter.pop();})}
+                                                            : text== 'الى مكان: '.tr()
+                                                            ? {
+                                                          setState(() {
+                                                            place2 = HomeCubit.get(context).GetListPlace[index];
+                                                            MagicRouter.pop();}),}
+                                                            : text == 'الى مركز التلكفة: '.tr()
+                                                            ? {
+                                                          setState(() {
+                                                            cost2 = HomeCubit.get(context).GetListCost[index];
+                                                            MagicRouter.pop();})}
                                                             : text== 'من مركز التلكفة: '.tr()
                                                             ? {
                                                           setState(() {
-                                                            cost1 ==
-                                                                HomeCubit.get(context)
-                                                                    .GetListCost[index];
-                                                            cost1 =
-                                                            HomeCubit.get(context)
-                                                                .GetListCost[index];
-                                                            MagicRouter.pop();
-                                                          }),
-                                                        }
+                                                            cost1 = HomeCubit.get(context).GetListCost[index];
+                                                            MagicRouter.pop();})}
                                                             : '';
                                                       },
                                                       child: Padding(
@@ -855,19 +585,22 @@ class _DailyPickupCarState extends State<DailyPickupCar> {
                                                           children: [
                                                             CustomText(
                                                                 text: text == 'رقم اللوحة: '.tr()
-                                                                    ? HomeCubit.get(context)
-                                                                    .GetListPlate[index]
-                                                                ['Plate_No']
+                                                                    ? HomeCubit.get(context).GetListPlate[index]['Plate_No']
+                                                                    :
+                                                                text == 'الموظف: '.tr()
+                                                                    ? HomeCubit.get(context).GetListEmployee[index]['Emp_Code']
+                                                                    :
+                                                                text == 'رقم العقد: '.tr()
+                                                                    ? HomeCubit.get(context).GetListContract[index]['Prj_No']
                                                                     :
                                                                 text == 'الى مركز التلكفة: '.tr()||text== 'من مركز التلكفة: '.tr()
-                                                                    ? HomeCubit.get(context)
-                                                                    .GetListCost[index]
-                                                                ['CST_No']
+                                                                    ? HomeCubit.get(context).GetListCost[index]['CST_No']
+                                                                    :
+                                                                text == 'العميل: '.tr()
+                                                                    ? HomeCubit.get(context).GetListCustomer[index]['Cust_No'].toString()
                                                                     :
                                                                 text=='من مكان: '.tr()||text== 'الى مكان: '.tr()
-                                                                    ? HomeCubit.get(context)
-                                                                    .GetListPlace[index]
-                                                                ['Sub_Code'].toString()
+                                                                    ? HomeCubit.get(context).GetListPlace[index]['Sub_Code'].toString()
                                                                     : '123',
                                                                 fontWeight: FontWeight.w600,
                                                                 fontSize:
@@ -878,32 +611,18 @@ class _DailyPickupCarState extends State<DailyPickupCar> {
                                                                 color: Colors.black),
                                                             CustomText(
                                                                 text: text == 'رقم اللوحة: '.tr()
-                                                                    ? HomeCubit.get(context)
-                                                                    .GetListPlate[index]
-                                                                ['fa_DSC_En']
-                                                                    .toString()
-                                                                    :
-                                                                text == 'الى مركز التلكفة: '.tr()||text== 'من مركز التلكفة: '.tr()
-                                                                    ? (EasyLocalization.of(navigatorKey.currentContext!)!
-                                                                    .currentLocale ==
-                                                                    const Locale('ar', '')
-                                                                    ?HomeCubit.get(context)
-                                                                    .GetListCost[index]
-                                                                ['CST_NM_AR']:HomeCubit.get(context)
-                                                                    .GetListCost[index]
-                                                                ['CST_NM_EN'])
-                                                                    :
-                                                                text=='من مكان: '.tr()||text== 'الى مكان: '.tr()
-                                                                    ? (EasyLocalization.of(navigatorKey.currentContext!)!
-                                                                    .currentLocale ==
-                                                                    const Locale('ar', '')
-                                                                    ?HomeCubit.get(context)
-                                                                    .GetListPlace[index]
-                                                                ['Name_AR']:HomeCubit.get(context)
-                                                                    .GetListPlace[index]
-                                                                ['Name_EN'])
-                                                                    :
-                                                                'محمد عاطف',
+                                                                    ? HomeCubit.get(context).GetListPlate[index]['fa_DSC'].toString()
+                                                                    :  text == 'العميل: '.tr()
+                                                                    ? HomeCubit.get(context).GetListCustomer[index]['DSCR'].toString()
+                                                                    : text == 'الموظف: '.tr()
+                                                                    ? HomeCubit.get(context).GetListEmployee[index]['Emp_NM'].toString()
+                                                                    : text == 'رقم العقد: '.tr()
+                                                                    ? HomeCubit.get(context).GetListContract[index]['Stat_Nm'].toString()
+                                                                    : text == 'الى مركز التلكفة: '.tr()||text== 'من مركز التلكفة: '.tr()
+                                                                    ? ( HomeCubit.get(context).GetListCost[index]['CST_NM'])
+                                                                    : text=='من مكان: '.tr()||text== 'الى مكان: '.tr()
+                                                                    ? ( HomeCubit.get(context).GetListPlace[index]['Name'])
+                                                                    : 'محمد عاطف',
                                                                 fontWeight: FontWeight.w600,
                                                                 fontSize:
                                                                 ScreenUtil().orientation ==
@@ -911,17 +630,17 @@ class _DailyPickupCarState extends State<DailyPickupCar> {
                                                                     ? 6.sp
                                                                     : 13.sp,
                                                                 color: Colors.black),
-                                                            text=='من مكان: '.tr()||text== 'الى مكان: '.tr()||    text == 'رقم اللوحة: '.tr()||text == 'الى مركز التلكفة: '.tr()||text== 'من مركز التلكفة: '.tr()
-                                                                ? const SizedBox()
-                                                                : CustomText(
-                                                                text: '01021424949',
-                                                                fontWeight: FontWeight.w600,
-                                                                fontSize: ScreenUtil()
-                                                                    .orientation ==
-                                                                    Orientation.landscape
-                                                                    ? 6.sp
-                                                                    : 13.sp,
-                                                                color: Colors.black)
+                                                            // text=='من مكان: '.tr()||text == 'العميل: '.tr()||text== 'الى مكان: '.tr()||    text == 'رقم اللوحة: '.tr()||text == 'الى مركز التلكفة: '.tr()||text== 'من مركز التلكفة: '.tr()
+                                                            //     ? const SizedBox()
+                                                            //     : CustomText(
+                                                            //     text: '01021424949',
+                                                            //     fontWeight: FontWeight.w600,
+                                                            //     fontSize: ScreenUtil()
+                                                            //         .orientation ==
+                                                            //         Orientation.landscape
+                                                            //         ? 6.sp
+                                                            //         : 13.sp,
+                                                            //     color: Colors.black)
                                                           ],
                                                         ),
                                                       ),
@@ -973,40 +692,21 @@ class _DailyPickupCarState extends State<DailyPickupCar> {
                         contentPadding: const EdgeInsets.fromLTRB(
                             0.0, 0.0, 0.0, 0.0),
                         hintText: ' ${text == 'رقم اللوحة: '.tr()
-                            ? (plate == null
-                            ? ''
-                            : plate['fa_DSC_En'])
+                            ? (plate == null ? '' : plate['fa_DSC'])
                             : text == 'من مركز التلكفة: '.tr()
-                            ? (cost1 == null
-                            ? ''
-                            : ( EasyLocalization.of(navigatorKey.currentContext!)!
-                            .currentLocale ==
-                            const Locale('ar', '')
-                            ?cost1['CST_NM_AR']:cost1['CST_NM_EN']))
-                            :
-                        text == 'الى مركز التلكفة: '.tr()
-                            ? (cost2 == null
-                            ? ''
-                            : ( EasyLocalization.of(navigatorKey.currentContext!)!
-                            .currentLocale ==
-                            const Locale('ar', '')
-                            ?cost2['CST_NM_AR']:cost2['CST_NM_EN']))
-                            :
-                        text == 'من مكان: '.tr()
-                            ? (place1 == null
-                            ? ''
-                            : ( EasyLocalization.of(navigatorKey.currentContext!)!
-                            .currentLocale ==
-                            const Locale('ar', '')
-                            ?place1['Name_AR']:place1['Name_EN']))
-                            :
-                        text == 'الى مكان: '.tr()
-                            ? (place2 == null
-                            ? ''
-                            : ( EasyLocalization.of(navigatorKey.currentContext!)!
-                            .currentLocale ==
-                            const Locale('ar', '')
-                            ?place2['Name_AR']:place2['Name_EN']))
+                            ? (cost1 == null ? '' : ( cost1['CST_NM']))
+                            : text == 'الى مركز التلكفة: '.tr()
+                            ? (cost2 == null ? '' : ( cost2['CST_NM']))
+                            :  text == 'العميل: '.tr()
+                            ? (customer == null ? '' : (customer['DSCR']))
+                            : text == 'الموظف: '.tr()
+                            ? (employee == null ? '' : (employee['Emp_NM']))
+                            : text == 'رقم العقد: '.tr()
+                            ? (contract == null ? '' : (contract['Stat_Nm']))
+                            : text == 'من مكان: '.tr()
+                            ? (place1 == null ? '' : (place1['Name']))
+                            : text == 'الى مكان: '.tr()
+                            ? (place2 == null ? '' : ( place2['Name']))
                             : ''}',
                         hintStyle: const TextStyle(
                             color: Colors.black,
@@ -1332,7 +1032,7 @@ class _DailyPickupCarState extends State<DailyPickupCar> {
                                                             text: text == 'رقم اللوحة: '.tr()
                                                                 ? HomeCubit.get(context)
                                                                 .GetListPlate[index]
-                                                            ['fa_DSC_En']
+                                                            ['fa_DSC']
                                                                 .toString()
                                                                 :
                                                             text == 'الى مركز التلكفة: '.tr()||text== 'من مركز التلكفة: '.tr()
@@ -1482,28 +1182,26 @@ class _DailyPickupCarState extends State<DailyPickupCar> {
                           Expanded(
                             child: InkWell(
                               onTap: (){
-                               setState(() {
-                                 plate=null;
-                                 place1=null;
-                                 place2=null;
-                                 date=null;
-                                 date1=null;
-                                 date2=null;
-                                 time=null;
-                                 cost1=null;
-                                 cost2=null;
-                               });
-                              },
+                                setState(() {
+                                  customer=null;
+                                   contract=null;
+                                   plate=null;
+                                   place1=null;
+                                   place2=null;
+                                   date=null;
+                                   date1=null;
+                                   date2=null;
+                                   time=null;
+                                   cost1=null;
+                                   cost2=null;
+                                });},
                               child: Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.yellow,
-                                  borderRadius:
-                                      BorderRadiusDirectional.circular(20.r),
+                                decoration: BoxDecoration(color: Colors.yellow,
+                                  borderRadius: BorderRadiusDirectional.circular(20.r),
                                 ),
                                 child: Center(
                                   child: Padding(
-                                    padding: EdgeInsets.symmetric(
-                                        vertical: 10.h, horizontal: 12.w),
+                                    padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 12.w),
                                     child: CustomText(
                                         text: 'تفريغ البيانات'.tr(),
                                         fontSize: 18.sp,

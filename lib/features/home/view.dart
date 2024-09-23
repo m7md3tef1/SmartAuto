@@ -32,6 +32,9 @@ class _HomeViewState extends State<HomeView> {
     HomeCubit.get(context).getListPlate();
     HomeCubit.get(context).getListCost();
     HomeCubit.get(context).getListPlace();
+    HomeCubit.get(context).getListCustomer();
+    HomeCubit.get(context).getListEmployee();
+    HomeCubit.get(context).getListContract();
     super.initState();
   }
 

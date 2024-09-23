@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SessionTimeOutListener(
-      duration: const Duration(minutes: 1),
+      duration: const Duration(minutes: 10000000),
       onTimeOut: () {
         SystemNavigator.pop();
       },

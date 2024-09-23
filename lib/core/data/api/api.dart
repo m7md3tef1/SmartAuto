@@ -93,17 +93,12 @@ print(response.data);
 
   Future<dynamic> postHttp({required url, data, authToken, queryParams}) async {
     try {
-      var response = await Dio().post('$baseUrl$url',
+      var response = await Dio().post(url,
           data: data,
           queryParameters: queryParams,
           options: Options(
             headers: {
-              "Authorization": 'Bearer $authToken',
-              "lang": EasyLocalization.of(navigatorKey.currentContext!)!
-                          .currentLocale ==
-                      const Locale('ar', '')
-                  ? 'ar'
-                  : "en"
+              "Content-Type": 'application/json',
             },
           ));
 
