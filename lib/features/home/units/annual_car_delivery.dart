@@ -721,10 +721,6 @@ class _AnnualDeliveringCarState extends State<AnnualDeliveringCar> {
                 SizedBox(
                   width: 205.w,
                   child: TextFormField( enabled: false,
-                    controller: text == 'ملاحظات: '.tr()? Notes:
-                    text == 'قراءة العداد الحالية: '?curCntr:
-                    text == 'قراءة العداد السابقة: '.tr()?prvCntr:
-                    null,
                     decoration: InputDecoration(
                         errorStyle: TextStyle(
                             fontFamily: 'tj',
@@ -835,8 +831,22 @@ class _AnnualDeliveringCarState extends State<AnnualDeliveringCar> {
                           HomeCubit.get(context).GetMaxKey;
                         }
                         return TextFormField(
+                            controller: text == 'ملاحظات: '.tr()? Notes:
+                            text == 'قراءة العداد الحالية: '?curCntr:
+                            text == 'قراءة العداد السابقة: '.tr()?prvCntr:
+                            null,
+                            onChanged: (value) {
+                              setState(() {
+                                text == 'ملاحظات: '.tr()? Notes!.text=value:
+                                text == 'قراءة العداد الحالية: '?curCntr!.text=value:
+                                text == 'قراءة العداد السابقة: '.tr()?prvCntr!.text=value:'';
+                                print(Notes!.text);
+                              });
+
+                            },
                           enabled:text=='تاريخ الاسترجاع المتوقع: '.tr()||text=='تاريخ الحركة: '.tr()||text=='رقم الحركة: '.tr()? false:true,
                           decoration: InputDecoration(
+
                               errorStyle: TextStyle(
                                   fontFamily: 'tj',
                                   color: Colors.red,
@@ -1247,6 +1257,9 @@ class _AnnualDeliveringCarState extends State<AnnualDeliveringCar> {
                                   cost1=null;
                                   cost2=null;
                                   employee=null;
+                                  prvCntr!.clear();
+                                  Notes!.clear();
+                                  curCntr!.clear();
                                 });
                               },
                               child: Container(
@@ -1273,7 +1286,8 @@ class _AnnualDeliveringCarState extends State<AnnualDeliveringCar> {
                           Expanded(
                             child: InkWell(
                               onTap: (){
-                                // print(date2);
+                                print(date2);
+                                print(curCntr!.text);
                                 HomeCubit.get(context).add(
                                     HomeCubit.get(context).GetMaxKey,
                                     date2,
@@ -1284,7 +1298,7 @@ class _AnnualDeliveringCarState extends State<AnnualDeliveringCar> {
                                     date,
                                     time,
                                     Notes!.text,
-                                    "rcempCode",
+                                     (employee==null?null:employee['Emp_Code']),
                                     (employee==null?null:employee['Emp_Code']),
                                     (plate==null?null:plate['Plate_No']),
                                     context);

@@ -23,7 +23,7 @@ class _DailyPickupCarState extends State<DailyPickupCar> {
   var date;
   var date1;
   var date2;
-  TextEditingController? notes=TextEditingController();
+  TextEditingController? Notes=TextEditingController();
   TextEditingController? curCntr=TextEditingController();
   TextEditingController? prvCntr=TextEditingController();
   var time;
@@ -32,7 +32,7 @@ class _DailyPickupCarState extends State<DailyPickupCar> {
   var employeePin;
   var employeePin1;
   var cost2;
-  customRow1(text, hint, isSearch, context) {
+  customRow1(text, hint, isSearch, context){
     return Padding(
         padding: const EdgeInsets.only(top: 2.0, bottom: 2, left: 8, right: 8),
         child:
@@ -723,10 +723,6 @@ class _DailyPickupCarState extends State<DailyPickupCar> {
                 SizedBox(
                   width: 205.w,
                   child: TextFormField( enabled: false,
-                    controller: text == 'ملاحظات: '.tr()? notes:
-                    text == 'قراءة العداد الحالية: '?curCntr:
-                    text == 'قراءة العداد السابقة: '.tr()?prvCntr:
-                    null,
                     decoration: InputDecoration(
                         errorStyle: TextStyle(
                             fontFamily: 'tj',
@@ -837,8 +833,22 @@ class _DailyPickupCarState extends State<DailyPickupCar> {
                           HomeCubit.get(context).GetMaxKey;
                         }
                         return TextFormField(
+                            controller: text == 'ملاحظات: '.tr()? Notes:
+                            text == 'قراءة العداد الحالية: '?curCntr:
+                            text == 'قراءة العداد السابقة: '.tr()?prvCntr:
+                            null,
+                            onChanged: (value) {
+                              setState(() {
+                                text == 'ملاحظات: '.tr()? Notes!.text=value:
+                                text == 'قراءة العداد الحالية: '?curCntr!.text=value:
+                                text == 'قراءة العداد السابقة: '.tr()?prvCntr!.text=value:'';
+                                print(Notes!.text);
+                              });
+
+                            },
                             enabled:text=='تاريخ الاسترجاع المتوقع: '.tr()||text=='تاريخ الحركة: '.tr()||text=='رقم الحركة: '.tr()? false:true,
                             decoration: InputDecoration(
+
                                 errorStyle: TextStyle(
                                     fontFamily: 'tj',
                                     color: Colors.red,
@@ -1246,6 +1256,9 @@ class _DailyPickupCarState extends State<DailyPickupCar> {
                                    time=null;
                                    cost1=null;
                                    cost2=null;
+                                  prvCntr!.clear();
+                                  Notes!.clear();
+                                  curCntr!.clear();
                                 });},
                               child: Container(
                                 decoration: BoxDecoration(color: Colors.yellow,
@@ -1278,8 +1291,8 @@ class _DailyPickupCarState extends State<DailyPickupCar> {
                                     (customer==null?null:customer['Cust_No']),
                                     date,
                                     time,
-                                    notes!.text,
-                                    "rcempCode",
+                                    Notes!.text,
+                                     (employee==null?null:employee['Emp_Code']),
                                     (employee==null?null:employee['Emp_Code']),
                                     (plate==null?null:plate['Plate_No']),
                                     context);

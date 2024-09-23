@@ -1,11 +1,10 @@
-import 'dart:ui';
-
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:smartauto/core/dialoges/toast.dart';
 
 import '../../../core/data/api/api.dart';
 import '../../../core/router/router.dart';
@@ -237,27 +236,29 @@ class HomeCubit extends Cubit<HomeState> {
                     borderSide: BorderSide(color: Colors.transparent)),
                 child: const SpinKitCircle(color: Colors.yellow, size: 70.0));
           });
-      var data={
-        "Trans_ty": transTy,
-        "Trans_dt": transDt,
-        "Prv_Cntr": prvCntr,
-        "Cur_Cntr": curCntr,
-        "In_Prj_no": inPrjNo,
-        "Cust_no": custNo,
-        "Out_dt": outDt,
-        "Out_tm": outTm,
-        "Out_Notes": outNotes,
-        "RcEmp_Code": rcempCode,
-        "OEmp_Code": oempCode,
-        "Plate_no": plateNo
+      var data = {
+        "Trans_ty": int.parse(transTy.toString()) ?? '',
+        "Trans_dt": transDt ?? '',
+        "Prv_Cntr": prvCntr ?? '',
+        "Cur_Cntr": curCntr ?? '',
+        "In_Prj_no": inPrjNo ?? '',
+        "Cust_no": custNo ?? '',
+        "Out_dt": outDt ?? '',
+        "Out_tm": outTm ?? '',
+        "Out_Notes": outNotes ?? '',
+        "RcEmp_Code": rcempCode ?? '',
+        "OEmp_Code": oempCode ?? '',
+        "Plate_no": plateNo ?? ''
       };
       print(data);
       var response = Api().postHttp(
-          url: 'https://smartautokw.com/api/carRent/addCarRent',
-          data: data);
+          url: 'https://smartautokw.com/api/carRent/addCarRent', data: data);
       response
           .then((value) async => {
                 print(value),
+                showToast(
+                    msg: 'تم الحفظ بنجاح'.tr(), state: ToastedStates.SUCCESS),
+                MagicRouter.pop(),
                 MagicRouter.pop(),
                 emit(AddCarRentSuccess()),
               })
