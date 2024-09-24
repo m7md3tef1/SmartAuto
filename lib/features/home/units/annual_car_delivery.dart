@@ -1297,6 +1297,7 @@ class _AnnualDeliveringCarState extends State<AnnualDeliveringCar> {
                                     showToast(msg: 'من فضلك أدخل البيانات'.tr(), state: ToastedStates.ERROR);
                                   }else{
                                     HomeCubit.get(context).add(
+                                        20,
                                         HomeCubit.get(context).GetMaxKey,
                                         date2,
                                         prvCntr!.text.isEmpty?null:prvCntr!.text,

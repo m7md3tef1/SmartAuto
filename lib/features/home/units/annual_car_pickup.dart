@@ -1292,6 +1292,7 @@ class _AnnualPickupCarState extends State<AnnualPickupCar> {
                                     showToast(msg: 'من فضلك أدخل البيانات'.tr(), state: ToastedStates.ERROR);
                                   }else{
                                     HomeCubit.get(context).add(
+                                        24,
                                         HomeCubit.get(context).GetMaxKey,
                                         date2,
                                         prvCntr!.text.isEmpty?null:prvCntr!.text,

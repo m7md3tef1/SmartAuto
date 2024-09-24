@@ -198,7 +198,7 @@ class HomeCubit extends Cubit<HomeState> {
     // });
   }
 
-  add(transTy, transDt, prvCntr, curCntr, inPrjNo, custNo, outDt, outTm,
+  add(transTy,transNo, transDt, prvCntr, curCntr, inPrjNo, custNo, outDt, outTm,
       outNotes, rcempCode, oempCode, plateNo, context) async {
     emit(AddCarRentLoading());
     connectivity.checkConnectivity().then((value) async {
@@ -225,6 +225,7 @@ class HomeCubit extends Cubit<HomeState> {
           });
       var data = {
         if (transTy != null) "Trans_ty": int.parse(transTy.toString()),
+        if (transNo != null) "Trans_no": int.parse(transNo.toString()),
         if (transDt != null) "Trans_dt": transDt.toString(),
         if (prvCntr != null) "Prv_Cntr": int.parse(prvCntr.toString()),
         if (curCntr != null) "Cur_Cntr": int.parse(curCntr.toString()),
@@ -237,13 +238,13 @@ class HomeCubit extends Cubit<HomeState> {
         if (oempCode != null) "OEmp_Code": oempCode.toString(),
         if (plateNo != null) "Plate_no": plateNo.toString()
       };
-      // debugPrint(jsonEncode(data));
+       debugPrint(jsonEncode(data));
       var response = Api().postHttp(
           url: 'https://smartautokw.com/api/carRent/addCarRent',
           data: jsonEncode(data));
       response
           .then((value) async => {
-                print(value),
+                // print(value),
                 showToast(
                     msg: 'تم الحفظ بنجاح'.tr(), state: ToastedStates.SUCCESS),
                 MagicRouter.pop(),
