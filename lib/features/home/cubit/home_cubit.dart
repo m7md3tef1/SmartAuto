@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -196,24 +198,6 @@ class HomeCubit extends Cubit<HomeState> {
     // });
   }
 
-/*
-
-{
-         public short Trans_ty { get; set; } // نوع الحركة
-         public int Trans_no { get; set; }  // رقم الحركة
-         public DateTime? Trans_dt { get; set; } // تاريخ الحركة
-         public int? Prv_Cntr { get; set; } // قراءة العداد السابقة
-         public int? Cur_Cntr { get; set; } // قراءة العداد الحالية
-         public string In_Prj_no { get; set; } // رقم العقد
-         public string Cust_no { get; set; } // العميل
-         public DateTime? Out_dt { get; set; } // تاريخ خروج السيارة
-         public DateTime? Out_tm { get; set; } // وقت الخروج
-         public string Out_Notes { get; set; } // ملاحظات الخروج
-         public string RcEmp_Code { get; set; } // السائق
-         public string OEmp_Code { get; set; } // الموظف
-}
-
- */
   add(transTy, transDt, prvCntr, curCntr, inPrjNo, custNo, outDt, outTm,
       outNotes, rcempCode, oempCode, plateNo, context) async {
     emit(AddCarRentLoading());
@@ -237,29 +221,30 @@ class HomeCubit extends Cubit<HomeState> {
                 child: const SpinKitCircle(color: Colors.yellow, size: 70.0));
           });
       var data = {
-        "Trans_ty": int.parse(transTy.toString()) ?? '',
-        "Trans_dt": transDt ?? '',
-        "Prv_Cntr": prvCntr ?? '',
-        "Cur_Cntr": curCntr ?? '',
-        "In_Prj_no": inPrjNo ?? '',
-        "Cust_no": custNo ?? '',
-        "Out_dt": outDt ?? '',
-        "Out_tm": outTm ?? '',
-        "Out_Notes": outNotes ?? '',
-        "RcEmp_Code": rcempCode ?? '',
-        "OEmp_Code": oempCode ?? '',
-        "Plate_no": plateNo ?? ''
+        if (transTy != null) "Trans_ty": int.parse(transTy.toString()),
+        if (transDt != null) "Trans_dt": transDt.toString(),
+        if (prvCntr != null) "Prv_Cntr": int.parse(prvCntr.toString()),
+        if (curCntr != null) "Cur_Cntr": int.parse(curCntr.toString()),
+        if (inPrjNo != null) "In_Prj_no": inPrjNo.toString(),
+        if (custNo != null) "Cust_no": custNo.toString(),
+        if (outDt != null) "Out_dt": outDt.toString(),
+        if (outTm != null) "Out_tm": outTm.toString(),
+        if (outNotes != null) "Out_Notes": outNotes.toString(),
+        if (rcempCode != null) "RcEmp_Code": rcempCode.toString(),
+        if (oempCode != null) "OEmp_Code": oempCode.toString(),
+        if (plateNo != null) "Plate_no": plateNo.toString()
       };
-      print(data);
+      // debugPrint(jsonEncode(data));
       var response = Api().postHttp(
-          url: 'https://smartautokw.com/api/carRent/addCarRent', data: data);
+          url: 'https://smartautokw.com/api/carRent/addCarRent',
+          data: jsonEncode(data));
       response
           .then((value) async => {
                 print(value),
                 showToast(
                     msg: 'تم الحفظ بنجاح'.tr(), state: ToastedStates.SUCCESS),
                 MagicRouter.pop(),
-                MagicRouter.pop(),
+                // MagicRouter.pop(),
                 emit(AddCarRentSuccess()),
               })
           .onError((error, stackTrace) => {

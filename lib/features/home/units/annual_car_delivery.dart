@@ -545,50 +545,38 @@ class _AnnualDeliveringCarState extends State<AnnualDeliveringCar> {
                                                           setState(() {
                                                             plate = HomeCubit.get(context).GetListPlate[index];
                                                             MagicRouter.pop();
-                                                          }),
-                                                        }
-                                                        :
-                                                        text == 'رقم العقد: '.tr()
+                                                          }),}
+                                                        : text == 'رقم العقد: '.tr()
                                                             ? {
                                                           setState(() {
                                                             contract = HomeCubit.get(context).GetListContract[index];
                                                             MagicRouter.pop();
-                                                          }),
-                                                        }
-                                                        :
-
-
-                                                        text == 'الموظف: '.tr()
+                                                          }),}
+                                                        : text == 'الموظف: '.tr()
                                                             ? {
                                                           setState(() {
                                                             employee = HomeCubit.get(context).GetListEmployee[index];
                                                             MagicRouter.pop();
-                                                          }),
-                                                        }
-                                                        :
-                                                        text == 'مستخدم السيارة: '.tr()
+                                                          }),}
+                                                        : text == 'مستخدم السيارة: '.tr()
                                                             ? {
                                                           setState(() {
                                                             employeeCar = HomeCubit.get(context).GetListEmployee[index];
                                                             MagicRouter.pop();
-                                                          }),
-                                                        }
+                                                          }),}
                                                         : text == 'مستلم المفتاح: '.tr()
                                                             ? {
                                                           setState(() {
                                                             employeePin = HomeCubit.get(context).GetListEmployee[index];
                                                             MagicRouter.pop();
-                                                          }),
-                                                        }
+                                                          }),}
                                                         : text == 'مستلم المفتاح الاحتياطى: '.tr()
                                                             ? {
                                                           setState(() {
                                                             employeePin1 = HomeCubit.get(context).GetListEmployee[index];
                                                             MagicRouter.pop();
-                                                          }),
-                                                        }
-                                                        :
-                                                        text == 'العميل: '.tr()
+                                                          }),}
+                                                        : text == 'العميل: '.tr()
                                                             ? {
                                                           setState(() {
                                                             customer = HomeCubit.get(context).GetListCustomer[index];
@@ -627,7 +615,7 @@ class _AnnualDeliveringCarState extends State<AnnualDeliveringCar> {
                                                                 text: text == 'رقم اللوحة: '.tr()
                                                                     ? HomeCubit.get(context).GetListPlate[index]['Plate_No']
                                                                     :
-                                                                text == 'الموظف: '.tr()
+                                                                text == 'مستلم المفتاح الاحتياطى: '.tr()  || text == 'الموظف: '.tr()  ||text == 'مستخدم السيارة: '.tr()||text == 'مستلم المفتاح: '.tr()
                                                                     ? HomeCubit.get(context).GetListEmployee[index]['Emp_Code']
                                                                     :
                                                                 text == 'رقم العقد: '.tr()
@@ -654,7 +642,7 @@ class _AnnualDeliveringCarState extends State<AnnualDeliveringCar> {
                                                                     ? HomeCubit.get(context).GetListPlate[index]['fa_DSC'].toString()
                                                                     :  text == 'العميل: '.tr()
                                                                     ? HomeCubit.get(context).GetListCustomer[index]['DSCR'].toString()
-                                                                    : text == 'الموظف: '.tr()
+                                                                    : text == 'مستلم المفتاح الاحتياطى: '.tr()  || text == 'الموظف: '.tr()  ||text == 'مستخدم السيارة: '.tr()||text == 'مستلم المفتاح: '.tr()
                                                                     ? HomeCubit.get(context).GetListEmployee[index]['Emp_NM'].toString()
                                                                     : text == 'رقم العقد: '.tr()
                                                                     ? HomeCubit.get(context).GetListContract[index]['Stat_Nm'].toString()
@@ -743,9 +731,9 @@ class _AnnualDeliveringCarState extends State<AnnualDeliveringCar> {
                             ? (employee == null ? '' : (employee['Emp_NM']))
                             : text == 'مستخدم السيارة: '.tr()
                             ? (employeeCar == null ? '' : (employeeCar['Emp_NM']))
-                            :  text == 'مستلم المفتاح الاحتياطى: '.tr()
+                            : text == 'مستلم المفتاح: '.tr()
                             ? (employeePin == null ? '' : (employeePin['Emp_NM']))
-                            :  text == 'مستلم المفتاح: '.tr()
+                            :   text == 'مستلم المفتاح الاحتياطى: '.tr()
                             ? (employeePin1 == null ? '' : (employeePin1['Emp_NM']))
                             : text == 'رقم العقد: '.tr()
                             ? (contract == null ? '' : (contract['Stat_Nm']))
@@ -798,7 +786,6 @@ class _AnnualDeliveringCarState extends State<AnnualDeliveringCar> {
               children: [
                 InkWell(
                   onTap:text=='تاريخ الاسترجاع المتوقع: '.tr()||text=='تاريخ الحركة: '.tr()? () async{
-
                     DateTime?
                     newDate =
                     await showDatePicker(
@@ -840,13 +827,12 @@ class _AnnualDeliveringCarState extends State<AnnualDeliveringCar> {
                                 text == 'ملاحظات: '.tr()? Notes!.text=value:
                                 text == 'قراءة العداد الحالية: '?curCntr!.text=value:
                                 text == 'قراءة العداد السابقة: '.tr()?prvCntr!.text=value:'';
-                                print(Notes!.text);
                               });
-
                             },
+                            keyboardType:text == 'قراءة العداد الحالية: '|| text == 'قراءة العداد السابقة: '? TextInputType.number: TextInputType.name,
                           enabled:text=='تاريخ الاسترجاع المتوقع: '.tr()||text=='تاريخ الحركة: '.tr()||text=='رقم الحركة: '.tr()? false:true,
+                            inputFormatters: text == 'قراءة العداد الحالية: '|| text == 'قراءة العداد السابقة: '?[FilteringTextInputFormatter.deny(','),FilteringTextInputFormatter.deny('-')]:[],
                           decoration: InputDecoration(
-
                               errorStyle: TextStyle(
                                   fontFamily: 'tj',
                                   color: Colors.red,
@@ -1286,19 +1272,17 @@ class _AnnualDeliveringCarState extends State<AnnualDeliveringCar> {
                           Expanded(
                             child: InkWell(
                               onTap: (){
-                                print(date2);
-                                print(curCntr!.text);
                                 HomeCubit.get(context).add(
                                     HomeCubit.get(context).GetMaxKey,
                                     date2,
-                                    prvCntr!.text,
-                                    curCntr!.text,
+                                    prvCntr!.text.isEmpty?null:prvCntr!.text,
+                                    curCntr!.text.isEmpty?null:curCntr!.text,
                                     (contract==null?null:contract['Prj_No']),
                                     (customer==null?null:customer['Cust_No']),
                                     date,
                                     time,
-                                    Notes!.text,
-                                     (employee==null?null:employee['Emp_Code']),
+                                    Notes!.text.isEmpty?null:Notes!.text,
+                                    (employee==null?null:employee['Emp_Code']),
                                     (employee==null?null:employee['Emp_Code']),
                                     (plate==null?null:plate['Plate_No']),
                                     context);
