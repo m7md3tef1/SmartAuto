@@ -101,11 +101,11 @@ class HomeCubit extends Cubit<HomeState> {
     {
       var response = Api().getHttp(
           url:
-              // EasyLocalization.of(navigatorKey.currentContext!)!
-              //             .currentLocale ==
-              //         const Locale('ar', '') ?
+              EasyLocalization.of(navigatorKey.currentContext!)!
+                          .currentLocale ==
+                      const Locale('ar', '') ?
               'https://smartautokw.com/api/eRP_Prjcts/GetListof_ContractAR'
-          // : 'https://smartautokw.com/api/eRP_Prjcts/GetListof_ContractAR'
+          : 'https://smartautokw.com/api/eRP_Prjcts/GetListof_ContractEN'
           );
       response
           .then((value) async => {
@@ -129,11 +129,11 @@ class HomeCubit extends Cubit<HomeState> {
     {
       var response = Api().getHttp(
           url:
-              // EasyLocalization.of(navigatorKey.currentContext!)!
-              //             .currentLocale ==
-              //         const Locale('ar', '') ?
+               EasyLocalization.of(navigatorKey.currentContext!)!
+                         .currentLocale ==
+                       const Locale('ar', '') ?
               'https://smartautokw.com/api/eRP_PrjCust/GetListof_CustomerAR'
-          // : 'https://smartautokw.com/api/eRP_Codes/GetListof_CustomerEN'
+           : 'https://smartautokw.com/api/eRP_PrjCust/GetListof_CustomerEN'
           );
       response
           .then((value) async => {
@@ -157,11 +157,11 @@ class HomeCubit extends Cubit<HomeState> {
     {
       var response = Api().getHttp(
           url:
-              // EasyLocalization.of(navigatorKey.currentContext!)!
-              //             .currentLocale ==
-              //         const Locale('ar', '') ?
+              EasyLocalization.of(navigatorKey.currentContext!)!
+                          .currentLocale ==
+                      const Locale('ar', '') ?
               'https://smartautokw.com/api/eRP_Emps/GetListof_EmployeeAR'
-          // : 'https://smartautokw.com/api/eRP_Codes/GetListof_EmployeeEN'
+          : 'https://smartautokw.com/api/eRP_Emps/GetListof_EmployeeEN'
           );
       response
           .then((value) async => {
@@ -201,9 +201,12 @@ class HomeCubit extends Cubit<HomeState> {
   add(transTy, transDt, prvCntr, curCntr, inPrjNo, custNo, outDt, outTm,
       outNotes, rcempCode, oempCode, plateNo, context) async {
     emit(AddCarRentLoading());
-    // connectivity.checkConnectivity().then((value) async {
-    //   if (ConnectivityResult.none == value) {
-    //   } else
+    connectivity.checkConnectivity().then((value) async {
+      if (ConnectivityResult.none == value) {
+        showToast(
+            msg: 'Check your internet connection and try again'.tr(),
+            state: ToastedStates.WARNING);
+      } else
     {
       showDialog(
           barrierDismissible: false,
@@ -253,6 +256,6 @@ class HomeCubit extends Cubit<HomeState> {
                 emit(AddCarRentFailed()),
               });
     }
-    // });
+    });
   }
 }
