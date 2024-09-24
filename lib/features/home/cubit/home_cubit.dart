@@ -247,7 +247,7 @@ class HomeCubit extends Cubit<HomeState> {
                 showToast(
                     msg: 'تم الحفظ بنجاح'.tr(), state: ToastedStates.SUCCESS),
                 MagicRouter.pop(),
-                // MagicRouter.pop(),
+                MagicRouter.pop(),
                 emit(AddCarRentSuccess()),
               })
           .onError((error, stackTrace) => {
