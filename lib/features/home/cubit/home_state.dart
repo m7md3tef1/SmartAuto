@@ -39,6 +39,13 @@ class GetCustomerSuccess extends HomeState {}
 
 class GetCustomerFailed extends HomeState {}
 
+//get_key_place
+class GetKeyPlaceLoading extends HomeState {}
+
+class GetKeyPlaceSuccess extends HomeState {}
+
+class GetKeyPlaceFailed extends HomeState {}
+
 //get_employee
 class GetEmployeeLoading extends HomeState {}
 

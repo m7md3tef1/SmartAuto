@@ -100,13 +100,11 @@ class HomeCubit extends Cubit<HomeState> {
     //   } else
     {
       var response = Api().getHttp(
-          url:
-              EasyLocalization.of(navigatorKey.currentContext!)!
-                          .currentLocale ==
-                      const Locale('ar', '') ?
-              'https://smartautokw.com/api/eRP_Prjcts/GetListof_ContractAR'
-          : 'https://smartautokw.com/api/eRP_Prjcts/GetListof_ContractEN'
-          );
+          url: EasyLocalization.of(navigatorKey.currentContext!)!
+                      .currentLocale ==
+                  const Locale('ar', '')
+              ? 'https://smartautokw.com/api/eRP_Prjcts/GetListof_ContractAR'
+              : 'https://smartautokw.com/api/eRP_Prjcts/GetListof_ContractEN');
       response
           .then((value) async => {
                 GetListContract = value,
@@ -128,13 +126,11 @@ class HomeCubit extends Cubit<HomeState> {
     //   } else
     {
       var response = Api().getHttp(
-          url:
-               EasyLocalization.of(navigatorKey.currentContext!)!
-                         .currentLocale ==
-                       const Locale('ar', '') ?
-              'https://smartautokw.com/api/eRP_PrjCust/GetListof_CustomerAR'
-           : 'https://smartautokw.com/api/eRP_PrjCust/GetListof_CustomerEN'
-          );
+          url: EasyLocalization.of(navigatorKey.currentContext!)!
+                      .currentLocale ==
+                  const Locale('ar', '')
+              ? 'https://smartautokw.com/api/eRP_PrjCust/GetListof_CustomerAR'
+              : 'https://smartautokw.com/api/eRP_PrjCust/GetListof_CustomerEN');
       response
           .then((value) async => {
                 GetListCustomer = value,
@@ -148,6 +144,32 @@ class HomeCubit extends Cubit<HomeState> {
     // });
   }
 
+  var GetListKeyPlace;
+  getListKeyPlace() async {
+    emit(GetKeyPlaceLoading());
+    // connectivity.checkConnectivity().then((value) async {
+    //   if (ConnectivityResult.none == value) {
+    //   } else
+    {
+      var response = Api().getHttp(
+          url: EasyLocalization.of(navigatorKey.currentContext!)!
+                      .currentLocale ==
+                  const Locale('ar', '')
+              ? 'https://smartautokw.com/api/eRP_Codes/GetListof_KeyPlaceAR'
+              : 'https://smartautokw.com/api/eRP_Codes/GetListof_KeyPlaceEN');
+      response
+          .then((value) async => {
+                GetListKeyPlace = value,
+                emit(GetKeyPlaceSuccess()),
+              })
+          .onError((error, stackTrace) => {
+                print(error),
+                emit(GetKeyPlaceFailed()),
+              });
+    }
+    // });
+  }
+
   var GetListEmployee;
   getListEmployee() async {
     emit(GetEmployeeLoading());
@@ -156,13 +178,11 @@ class HomeCubit extends Cubit<HomeState> {
     //   } else
     {
       var response = Api().getHttp(
-          url:
-              EasyLocalization.of(navigatorKey.currentContext!)!
-                          .currentLocale ==
-                      const Locale('ar', '') ?
-              'https://smartautokw.com/api/eRP_Emps/GetListof_EmployeeAR'
-          : 'https://smartautokw.com/api/eRP_Emps/GetListof_EmployeeEN'
-          );
+          url: EasyLocalization.of(navigatorKey.currentContext!)!
+                      .currentLocale ==
+                  const Locale('ar', '')
+              ? 'https://smartautokw.com/api/eRP_Emps/GetListof_EmployeeAR'
+              : 'https://smartautokw.com/api/eRP_Emps/GetListof_EmployeeEN');
       response
           .then((value) async => {
                 GetListEmployee = value,
@@ -198,65 +218,64 @@ class HomeCubit extends Cubit<HomeState> {
     // });
   }
 
-  add(transTy,transNo, transDt, prvCntr, curCntr, inPrjNo, custNo, outDt, outTm,
-      outNotes, rcempCode, oempCode, plateNo, context) async {
+  add(transTy, transNo, transDt, prvCntr, curCntr, inPrjNo, custNo, outDt,
+      outTm, outNotes, rcempCode, oempCode, plateNo, context) async {
     emit(AddCarRentLoading());
     connectivity.checkConnectivity().then((value) async {
       if (ConnectivityResult.none == value) {
         showToast(
             msg: 'Check your internet connection and try again'.tr(),
             state: ToastedStates.WARNING);
-      } else
-    {
-      showDialog(
-          barrierDismissible: false,
-          useRootNavigator: false,
-          context: context,
-          builder: (_) {
-            return Dialog(
-                backgroundColor: Colors.transparent,
-                shadowColor: Colors.transparent,
-                surfaceTintColor: Colors.transparent,
-                insetPadding: EdgeInsets.symmetric(horizontal: 100.w),
-                shape: const OutlineInputBorder(
-                    borderRadius: BorderRadius.zero,
-                    borderSide: BorderSide(color: Colors.transparent)),
-                child: const SpinKitCircle(color: Colors.yellow, size: 70.0));
-          });
-      var data = {
-        if (transTy != null) "Trans_ty": int.parse(transTy.toString()),
-        if (transNo != null) "Trans_no": int.parse(transNo.toString()),
-        if (transDt != null) "Trans_dt": transDt.toString(),
-        if (prvCntr != null) "Prv_Cntr": int.parse(prvCntr.toString()),
-        if (curCntr != null) "Cur_Cntr": int.parse(curCntr.toString()),
-        if (inPrjNo != null) "In_Prj_no": inPrjNo.toString(),
-        if (custNo != null) "Cust_no": custNo.toString(),
-        if (outDt != null) "Out_dt": outDt.toString(),
-        if (outTm != null) "Out_tm": outTm.toString(),
-        if (outNotes != null) "Out_Notes": outNotes.toString(),
-        if (rcempCode != null) "RcEmp_Code": rcempCode.toString(),// السائق
-        if (oempCode != null) "OEmp_Code": oempCode.toString(),
-        if (plateNo != null) "Plate_no": plateNo.toString()
-      };
-       debugPrint(jsonEncode(data));
-      var response = Api().postHttp(
-          url: 'https://smartautokw.com/api/carRent/addCarRent',
-          data: jsonEncode(data));
-      response
-          .then((value) async => {
-                // print(value),
-                showToast(
-                    msg: 'تم الحفظ بنجاح'.tr(), state: ToastedStates.SUCCESS),
-                MagicRouter.pop(),
-                MagicRouter.pop(),
-                emit(AddCarRentSuccess()),
-              })
-          .onError((error, stackTrace) => {
-                print(error),
-                MagicRouter.pop(),
-                emit(AddCarRentFailed()),
-              });
-    }
+      } else {
+        showDialog(
+            barrierDismissible: false,
+            useRootNavigator: false,
+            context: context,
+            builder: (_) {
+              return Dialog(
+                  backgroundColor: Colors.transparent,
+                  shadowColor: Colors.transparent,
+                  surfaceTintColor: Colors.transparent,
+                  insetPadding: EdgeInsets.symmetric(horizontal: 100.w),
+                  shape: const OutlineInputBorder(
+                      borderRadius: BorderRadius.zero,
+                      borderSide: BorderSide(color: Colors.transparent)),
+                  child: const SpinKitCircle(color: Colors.yellow, size: 70.0));
+            });
+        var data = {
+          if (transTy != null) "Trans_ty": int.parse(transTy.toString()),
+          if (transNo != null) "Trans_no": int.parse(transNo.toString()),
+          if (transDt != null) "Trans_dt": transDt.toString(),
+          if (prvCntr != null) "Prv_Cntr": int.parse(prvCntr.toString()),
+          if (curCntr != null) "Cur_Cntr": int.parse(curCntr.toString()),
+          if (inPrjNo != null) "In_Prj_no": inPrjNo.toString(),
+          if (custNo != null) "Cust_no": custNo.toString(),
+          if (outDt != null) "Out_dt": outDt.toString(),
+          if (outTm != null) "Out_tm": outTm.toString(),
+          if (outNotes != null) "Out_Notes": outNotes.toString(),
+          if (rcempCode != null) "RcEmp_Code": rcempCode.toString(), // السائق
+          if (oempCode != null) "OEmp_Code": oempCode.toString(),
+          if (plateNo != null) "Plate_no": plateNo.toString()
+        };
+        debugPrint(jsonEncode(data));
+        var response = Api().postHttp(
+            url: 'https://smartautokw.com/api/carRent/addCarRent',
+            data: jsonEncode(data));
+        response
+            .then((value) async => {
+                  // print(value),
+                  showToast(
+                      msg: 'تم الحفظ بنجاح'.tr(), state: ToastedStates.SUCCESS),
+                  MagicRouter.pop(),
+                  MagicRouter.pop(),
+                  emit(AddCarRentSuccess()),
+                })
+            .onError((error, stackTrace) => {
+                  print(error),
+                  MagicRouter.pop(),
+                  emit(AddCarRentFailed()),
+                });
+      }
     });
   }
 }

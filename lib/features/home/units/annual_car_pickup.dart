@@ -25,6 +25,8 @@ class _AnnualPickupCarState extends State<AnnualPickupCar> {
   TextEditingController? Notes=TextEditingController();
   TextEditingController? curCntr=TextEditingController();
   TextEditingController? prvCntr=TextEditingController();
+  var placeKey;
+  var placeKeyReci;
   var time;
   var cost1;
   var employeeCar;
@@ -291,8 +293,9 @@ class _AnnualPickupCarState extends State<AnnualPickupCar> {
                 SizedBox(
                   width: 150.w,
                   child: TextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     validator: (value) {
-                      if (text == 'رقم اللوحة: '.tr()&&plate == null) {
+                      if (text == 'رقم اللوحة: '.tr()&&(plate == null)) {
                         return 'من فضلك أدخل بيانات اللوحة'.tr();
                       }
                       return null;
@@ -312,13 +315,18 @@ class _AnnualPickupCarState extends State<AnnualPickupCar> {
                         text == 'العميل: '.tr()
                             ? (customer == null ? '' : customer['Cust_No'])
                             :
+                        text == 'مكان المفتاح: '.tr()
+                            ? (placeKey == null ? '' : placeKey['Sub_Code'])
+                            :
+                        text == 'مكان مستلم المفتاح الاحتياطى: '.tr()
+                            ? (placeKeyReci == null ? '' : placeKeyReci['Sub_Code'])
+                            :
                         text == 'رقم العقد: '.tr()
                             ? (contract == null ? '' : contract['Prj_No'])
                             :
                         text == 'الموظف: '.tr()
                             ? (employee == null ? '' : employee['Emp_Code'])
                             :
-
                         text == 'مستخدم السيارة: '.tr()
                             ? (employeeCar == null ? '' : employeeCar['Emp_Code'])
                             :
@@ -328,7 +336,6 @@ class _AnnualPickupCarState extends State<AnnualPickupCar> {
                         text == 'مستلم المفتاح الاحتياطى: '.tr()
                             ? (employeePin1 == null ? '' : employeePin1['Emp_Code'])
                             :
-
                         text == 'من مركز التلكفة: '.tr()
                             ? (cost1 == null ? '' : cost1['CST_No'])
                             :
@@ -406,7 +413,7 @@ class _AnnualPickupCarState extends State<AnnualPickupCar> {
                                                 :
                                             text == 'رقم العقد: '.tr() ? 'العقود'.tr()
                                                 :
-                                            text=='من مكان: '.tr()||text== 'الى مكان: '.tr() ? "الأماكن".tr()
+                                            text == 'مكان مستلم المفتاح الاحتياطى: '.tr()||text == 'مستلم المفتاح: '.tr()||text=='من مكان: '.tr()||text== 'الى مكان: '.tr() ? "الأماكن".tr()
                                                 :
                                             text == 'من مركز التلكفة: '.tr()|| text == 'الى مركز التلكفة: '.tr()? 'نافذه استعلاميه عن مراكز التلكفة'.tr()
                                                 :
@@ -439,7 +446,7 @@ class _AnnualPickupCarState extends State<AnnualPickupCar> {
                                   ],
                                 ),
                                 content: SizedBox(
-                                    height: .5.sh,
+                                    height: .3.sh,
                                     width: 1.sw,
                                     child:
                                     Column(
@@ -463,7 +470,7 @@ class _AnnualPickupCarState extends State<AnnualPickupCar> {
                                                       text: text == 'رقم اللوحة: '.tr()
                                                           ? "رقم اللوحة".tr()
                                                           :
-                                                      text == 'مستلم المفتاح الاحتياطى: '.tr()  || text == 'الموظف: '.tr()  ||text == 'مستخدم السيارة: '.tr()||text == 'مستلم المفتاح: '.tr() ||text == 'رقم العقد: '.tr()||text == 'الى مركز التلكفة: '.tr()||  text == 'العميل: '.tr()||text== 'من مركز التلكفة: '.tr()||text=='من مكان: '.tr()||text== 'الى مكان: '.tr()
+                                                      text == 'مكان مستلم المفتاح الاحتياطى: '.tr()||text == 'مستلم المفتاح: '.tr()||text == 'مستلم المفتاح الاحتياطى: '.tr()  || text == 'الموظف: '.tr()  ||text == 'مستخدم السيارة: '.tr()||text == 'مستلم المفتاح: '.tr() ||text == 'رقم العقد: '.tr()||text == 'الى مركز التلكفة: '.tr()||  text == 'العميل: '.tr()||text== 'من مركز التلكفة: '.tr()||text=='من مكان: '.tr()||text== 'الى مكان: '.tr()
                                                           ? "الكود".tr()
                                                           : 'كود الموظف'.tr(),
                                                       fontWeight: FontWeight.bold,
@@ -476,7 +483,7 @@ class _AnnualPickupCarState extends State<AnnualPickupCar> {
                                                       text:
                                                       text == 'رقم اللوحة: '.tr() || text == 'الى مركز التلكفة: '.tr()||text== 'من مركز التلكفة: '.tr()
                                                           ? "الوصف".tr():
-                                                      text=='من مكان: '.tr()||   text == 'العميل: '.tr()||text== 'الى مكان: '.tr()
+                                                      text == 'مكان مستلم المفتاح الاحتياطى: '.tr()||text == 'مستلم المفتاح: '.tr()||text=='من مكان: '.tr()||   text == 'العميل: '.tr()||text== 'الى مكان: '.tr()
                                                           ? 'الإسم'.tr()
                                                           :
                                                       text == 'رقم العقد: '.tr()
@@ -516,15 +523,19 @@ class _AnnualPickupCarState extends State<AnnualPickupCar> {
                                                 ?const SizedBox():
                                             ( text=='من مكان: '.tr()||text== 'الى مكان: '.tr()) &&HomeCubit.get(context).GetListPlace==null
                                                 ?const SizedBox():
+                                            ( text == 'مكان مستلم المفتاح الاحتياطى: '.tr()||text == 'مستلم المفتاح: '.tr()) &&HomeCubit.get(context).GetListKeyPlace==null
+                                                ?const SizedBox():
                                             (text == 'الى مركز التلكفة: '.tr()||text== 'من مركز التلكفة: '.tr()) && HomeCubit.get(context).GetListCost==null
                                                 ?const SizedBox():
-
                                             ListView.builder(
                                               shrinkWrap: true,
                                               padding: EdgeInsets.zero,
                                               itemCount:
                                               text == 'رقم اللوحة: '.tr()
                                                   ? HomeCubit.get(context).GetListPlate!.length
+                                                  :
+                                              text == 'مكان مستلم المفتاح الاحتياطى: '.tr()||text == 'مستلم المفتاح: '.tr()
+                                                  ? HomeCubit.get(context).GetListKeyPlace!.length
                                                   :
                                               text == 'مستلم المفتاح الاحتياطى: '.tr()  || text == 'الموظف: '.tr()  ||text == 'مستخدم السيارة: '.tr()||text == 'مستلم المفتاح: '.tr()
                                                   ? HomeCubit.get(context).GetListEmployee!.length
@@ -549,7 +560,24 @@ class _AnnualPickupCarState extends State<AnnualPickupCar> {
                                                     text == 'رقم اللوحة: '.tr()
                                                         ? {
                                                       setState(() {
+
+                                                        // setState(() {
                                                         plate = HomeCubit.get(context).GetListPlate[index];
+                                                        // });
+                                                        formKey.currentState!.validate();
+                                                        MagicRouter.pop();
+                                                      }),}
+                                                        :text == 'مكان المفتاح: '.tr()
+                                                        ? {
+                                                      setState(() {
+                                                        placeKey = HomeCubit.get(context).GetListKeyPlace[index];
+                                                        formKey.currentState!.validate();
+                                                        MagicRouter.pop();
+                                                      }),}
+                                                        : text == 'مكان مستلم المفتاح الاحتياطى: '.tr()
+                                                        ? {
+                                                      setState(() {
+                                                        placeKeyReci = HomeCubit.get(context).GetListKeyPlace[index];
                                                         formKey.currentState!.validate();
                                                         MagicRouter.pop();
                                                       }),}
@@ -634,6 +662,9 @@ class _AnnualPickupCarState extends State<AnnualPickupCar> {
                                                             text == 'العميل: '.tr()
                                                                 ? HomeCubit.get(context).GetListCustomer[index]['Cust_No'].toString()
                                                                 :
+                                                            text == 'مكان مستلم المفتاح الاحتياطى: '.tr()||text == 'مكان المفتاح: '.tr()
+                                                                ? HomeCubit.get(context).GetListKeyPlace[index]['Sub_Code'].toString()
+                                                                :
                                                             text=='من مكان: '.tr()||text== 'الى مكان: '.tr()
                                                                 ? HomeCubit.get(context).GetListPlace[index]['Sub_Code'].toString()
                                                                 : '123',
@@ -655,6 +686,8 @@ class _AnnualPickupCarState extends State<AnnualPickupCar> {
                                                                 ? HomeCubit.get(context).GetListContract[index]['Stat_Nm'].toString()
                                                                 : text == 'الى مركز التلكفة: '.tr()||text== 'من مركز التلكفة: '.tr()
                                                                 ? ( HomeCubit.get(context).GetListCost[index]['CST_NM'])
+                                                                : text == 'مكان مستلم المفتاح الاحتياطى: '.tr()||text == 'مكان المفتاح: '.tr()
+                                                                ? ( HomeCubit.get(context).GetListKeyPlace[index]['Name'])
                                                                 : text=='من مكان: '.tr()||text== 'الى مكان: '.tr()
                                                                 ? ( HomeCubit.get(context).GetListPlace[index]['Name'])
                                                                 : 'محمد عاطف',
@@ -713,9 +746,11 @@ class _AnnualPickupCarState extends State<AnnualPickupCar> {
               children: [
                 SizedBox(
                   width: 205.w,
-                  child: TextFormField( enabled: false,
+                  child: TextFormField(
+                    enabled: false,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     validator: (value) {
-                      if (text == 'رقم اللوحة: '.tr()&&plate == null) {
+                      if (text == 'رقم اللوحة: '.tr()&&(plate == null||plate == '')) {
                         return 'من فضلك أدخل بيانات اللوحة'.tr();
                       }
                       return null;
@@ -752,6 +787,10 @@ class _AnnualPickupCarState extends State<AnnualPickupCar> {
                             ? (place1 == null ? '' : (place1['Name']))
                             : text == 'الى مكان: '.tr()
                             ? (place2 == null ? '' : ( place2['Name']))
+                            : text == 'مكان مستلم المفتاح الاحتياطى: '.tr()
+                            ? (placeKeyReci == null ? '' : (placeKeyReci['Name']))
+                            : text == 'مكان المفتاح: '.tr()
+                            ? (placeKey == null ? '' : ( placeKey['Name']))
                             : ''}',
                         hintStyle: const TextStyle(
                             color: Colors.black,
@@ -1254,6 +1293,11 @@ class _AnnualPickupCarState extends State<AnnualPickupCar> {
                                     date=null;
                                     date1=null;
                                     date2=null;
+                                    employeeCar=null;
+                                    employeePin=null;
+                                    employeePin1=null;
+                                    placeKey=null;
+                                    placeKeyReci=null;
                                     time=null;
                                     cost1=null;
                                     cost2=null;
@@ -1262,6 +1306,7 @@ class _AnnualPickupCarState extends State<AnnualPickupCar> {
                                     Notes!.clear();
                                     curCntr!.clear();
                                   });
+                                  formKey.currentState!.validate();
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(
@@ -1292,7 +1337,7 @@ class _AnnualPickupCarState extends State<AnnualPickupCar> {
                                     showToast(msg: 'من فضلك أدخل البيانات'.tr(), state: ToastedStates.ERROR);
                                   }else{
                                     HomeCubit.get(context).add(
-                                        24,
+                                        20,
                                         HomeCubit.get(context).GetMaxKey,
                                         date2,
                                         prvCntr!.text.isEmpty?null:prvCntr!.text,
