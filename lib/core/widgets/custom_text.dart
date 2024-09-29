@@ -44,14 +44,14 @@ class CustomText extends StatelessWidget {
             fontSize: fontSize,
             fontWeight: fontWeight,
             color: color,
-            height: textHeight,
+            // height: textHeight,
             fontFamily: 'tj',
             decoration: textDecoration,
-            decorationThickness: thick ?? 10.5,
+            // decorationThickness: thick ?? 10.5,
             decorationColor: colordir ?? ColorManager.backgroundColor),
         maxLines: line ?? 1,
-        softWrap: true,
-        overflow: TextOverflow.ellipsis,
+        // softWrap: true,
+        // overflow: TextOverflow.ellipsis,
         textAlign: align);
   }
 }

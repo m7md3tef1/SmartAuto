@@ -256,6 +256,8 @@ class _SmartAutoLoginScreenState extends State<SmartAutoLoginScreen> {
                                     });
                                   },
                                   child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     children: [
                                       Container(
                                           width: 25.w,
@@ -280,14 +282,18 @@ class _SmartAutoLoginScreenState extends State<SmartAutoLoginScreen> {
                                                 });
                                               })),
                                       SizedBox(width: 5.w),
-                                      CustomText(
-                                          text: 'تذكرنى'.tr(),
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: ScreenUtil().orientation ==
-                                                  Orientation.landscape
-                                              ? 7.sp
-                                              : 15.sp,
-                                          color: Colors.black),
+                                      Padding(
+                                        padding: EdgeInsets.only(top: 5.h),
+                                        child: CustomText(
+                                            text: 'تذكرنى'.tr(),
+                                            fontWeight: FontWeight.bold,
+                                            fontSize:
+                                                ScreenUtil().orientation ==
+                                                        Orientation.landscape
+                                                    ? 7.sp
+                                                    : 15.sp,
+                                            color: Colors.black),
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -404,16 +410,14 @@ class _SmartAutoLoginScreenState extends State<SmartAutoLoginScreen> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             children: [
-                                              SizedBox(width: 15.w),
                                               SmartAutoLoginCubit.get(context)
                                                           .getAuthCode ==
                                                       2
-                                                  ? const Icon(Icons.face,
-                                                      size: 35,
+                                                  ? Icon(Icons.face,
+                                                      size: 45.w,
                                                       color: Colors.black)
-                                                  : const Icon(
-                                                      Icons.fingerprint,
-                                                      size: 35,
+                                                  : Icon(Icons.fingerprint,
+                                                      size: 45.w,
                                                       color: Colors.black),
                                             ]),
                                       ),

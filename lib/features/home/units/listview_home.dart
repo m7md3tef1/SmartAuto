@@ -23,28 +23,28 @@ class ListViewHome extends StatelessWidget {
                   ? {
                       HomeCubit.get(context).GetMaxKey = null,
                       HomeCubit.get(context).getMaxKey(20),
-                      MagicRouter.navigateTo(AnnualDeliveringCar(
-                          'تسليم سيارة سنوى'.tr(), 'تسليم سيارة'))
+                      MagicRouter.navigateTo(
+                          AnnualDeliveringCar('تسليم سيارة سنوى'.tr()))
                     }
                   : index == 1
                       ? {
                           HomeCubit.get(context).GetMaxKey = null,
                           HomeCubit.get(context).getMaxKey(22),
-                          MagicRouter.navigateTo(DailyDeliveringCar(
-                              'تسليم سيارة يومي'.tr(), 'تسليم سيارة'))
+                          MagicRouter.navigateTo(
+                              DailyDeliveringCar('تسليم سيارة يومي'.tr()))
                         }
                       : index == 2
                           ? {
                               HomeCubit.get(context).GetMaxKey = null,
                               HomeCubit.get(context).getMaxKey(24),
-                              MagicRouter.navigateTo(AnnualPickupCar(
-                                  'إستلام سيارة سنوي'.tr(), 'تسليم سيارة'))
+                              MagicRouter.navigateTo(
+                                  AnnualPickupCar('إستلام سيارة سنوي'.tr()))
                             }
                           : {
                               HomeCubit.get(context).GetMaxKey = null,
                               HomeCubit.get(context).getMaxKey(23),
-                              MagicRouter.navigateTo(DailyPickupCar(
-                                  'إستلام سيارة يومي'.tr(), 'دخول السيارة'))
+                              MagicRouter.navigateTo(
+                                  DailyPickupCar('إستلام سيارة يومي'.tr()))
                             };
             },
             child: Padding(

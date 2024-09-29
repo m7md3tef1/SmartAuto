@@ -19,6 +19,7 @@ part 'units/app_bar.dart';
 part 'units/daily_car_delivery.dart';
 part 'units/daily_car_pickup.dart';
 part 'units/listview_home.dart';
+part 'units/custom_tras_screen.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
