@@ -174,18 +174,19 @@ class _DailyDeliveringCarState extends State<DailyDeliveringCar> {
                             Expanded(
                               child: InkWell(
                                 onTap: () {
-                                  if (HomeCubit.get(context).GetMaxKey ==
-                                          null ||
-                                      curCntr!.text.isEmpty ||
-                                      plate == null) {
+                                  if (
+                                      // HomeCubit.get(context).GetMaxKey == null ||
+                                      curCntr!.text.isEmpty || plate == null) {
                                     formKey.currentState!.validate();
                                     showToast(
                                         msg: 'من فضلك أدخل البيانات'.tr(),
                                         state: ToastedStates.ERROR);
                                   } else {
-                                    HomeCubit.get(context).add(
-                                        20,
-                                        HomeCubit.get(context).GetMaxKey,
+                                    HomeCubit.get(context).GetMaxKey = null;
+                                    HomeCubit.get(context).getMaxKey(
+                                        22,
+                                        22,
+                                        // HomeCubit.get(context).GetMaxKey,
                                         date2,
                                         prvCntr!.text.isEmpty
                                             ? null
@@ -214,6 +215,8 @@ class _DailyDeliveringCarState extends State<DailyDeliveringCar> {
                                             ? null
                                             : plate['Plate_No']),
                                         context);
+                                    // HomeCubit.get(context).add(
+                                    //   );
                                   }
                                 },
                                 child: Container(

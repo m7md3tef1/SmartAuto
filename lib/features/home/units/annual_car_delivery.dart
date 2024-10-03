@@ -2,7 +2,7 @@ part of '../view.dart';
 
 // ignore: must_be_immutable
 class AnnualDeliveringCar extends StatefulWidget {
-  AnnualDeliveringCar(this.nameCar,  {super.key});
+  AnnualDeliveringCar(this.nameCar, {super.key});
   var nameCar;
   @override
   State<AnnualDeliveringCar> createState() => _AnnualDeliveringCarState();
@@ -1359,18 +1359,19 @@ class _AnnualDeliveringCarState extends State<AnnualDeliveringCar> {
                             Expanded(
                               child: InkWell(
                                 onTap: () {
-                                  if (HomeCubit.get(context).GetMaxKey ==
-                                          null ||
-                                      curCntr!.text.isEmpty ||
-                                      plate == null) {
+                                  if (
+                                      // HomeCubit.get(context).GetMaxKey == null ||
+                                      curCntr!.text.isEmpty || plate == null) {
                                     formKey.currentState!.validate();
                                     showToast(
                                         msg: 'من فضلك أدخل البيانات'.tr(),
                                         state: ToastedStates.ERROR);
                                   } else {
-                                    HomeCubit.get(context).add(
+                                    HomeCubit.get(context).GetMaxKey = null;
+                                    HomeCubit.get(context).getMaxKey(
                                         20,
-                                        HomeCubit.get(context).GetMaxKey,
+                                        20,
+                                        // HomeCubit.get(context).GetMaxKey,
                                         date2,
                                         prvCntr!.text.isEmpty
                                             ? null
@@ -1399,6 +1400,8 @@ class _AnnualDeliveringCarState extends State<AnnualDeliveringCar> {
                                             ? null
                                             : plate['Plate_No']),
                                         context);
+                                    // HomeCubit.get(context).add(
+                                    //    );
                                   }
                                 },
                                 child: Container(

@@ -197,17 +197,48 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   var GetMaxKey;
-  getMaxKey(id) async {
+  getMaxKey(id, transTy, transDt, prvCntr, curCntr, inPrjNo, custNo, outDt,
+      outTm, outNotes, rcempCode, oempCode, plateNo, context) async {
     emit(GetMaxKeyLoading());
     // connectivity.checkConnectivity().then((value) async {
     //   if (ConnectivityResult.none == value) {
     //   } else
     {
+      showDialog(
+          barrierDismissible: false,
+          useRootNavigator: false,
+          context: context,
+          builder: (_) {
+            return Dialog(
+                backgroundColor: Colors.transparent,
+                shadowColor: Colors.transparent,
+                surfaceTintColor: Colors.transparent,
+                insetPadding: EdgeInsets.symmetric(horizontal: 100.w),
+                shape: const OutlineInputBorder(
+                    borderRadius: BorderRadius.zero,
+                    borderSide: BorderSide(color: Colors.transparent)),
+                child: const SpinKitCircle(color: Colors.yellow, size: 70.0));
+          });
       var response = Api().getHttp(
           url: 'https://smartautokw.com/api/eRP_CarsTRH/GetMaxKey/$id');
       response
           .then((value) async => {
                 GetMaxKey = value['Max'],
+                add(
+                    transTy,
+                    value['Max'],
+                    transDt,
+                    prvCntr,
+                    curCntr,
+                    inPrjNo,
+                    custNo,
+                    outDt,
+                    outTm,
+                    outNotes,
+                    rcempCode,
+                    oempCode,
+                    plateNo,
+                    context),
                 emit(GetMaxKeySuccess()),
               })
           .onError((error, stackTrace) => {
@@ -227,21 +258,6 @@ class HomeCubit extends Cubit<HomeState> {
             msg: 'Check your internet connection and try again'.tr(),
             state: ToastedStates.WARNING);
       } else {
-        showDialog(
-            barrierDismissible: false,
-            useRootNavigator: false,
-            context: context,
-            builder: (_) {
-              return Dialog(
-                  backgroundColor: Colors.transparent,
-                  shadowColor: Colors.transparent,
-                  surfaceTintColor: Colors.transparent,
-                  insetPadding: EdgeInsets.symmetric(horizontal: 100.w),
-                  shape: const OutlineInputBorder(
-                      borderRadius: BorderRadius.zero,
-                      borderSide: BorderSide(color: Colors.transparent)),
-                  child: const SpinKitCircle(color: Colors.yellow, size: 70.0));
-            });
         var data = {
           if (transTy != null) "Trans_ty": int.parse(transTy.toString()),
           if (transNo != null) "Trans_no": int.parse(transNo.toString()),

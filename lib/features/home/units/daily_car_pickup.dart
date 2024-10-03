@@ -183,9 +183,11 @@ class _DailyPickupCarState extends State<DailyPickupCar> {
                                         msg: 'من فضلك أدخل البيانات'.tr(),
                                         state: ToastedStates.ERROR);
                                   } else {
-                                    HomeCubit.get(context).add(
-                                        20,
-                                        HomeCubit.get(context).GetMaxKey,
+                                    HomeCubit.get(context).GetMaxKey = null;
+                                    HomeCubit.get(context).getMaxKey(
+                                        23,
+                                        23,
+                                        // HomeCubit.get(context).GetMaxKey,
                                         date2,
                                         prvCntr!.text.isEmpty
                                             ? null

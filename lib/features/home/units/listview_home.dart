@@ -21,28 +21,20 @@ class ListViewHome extends StatelessWidget {
             onTap: () {
               index == 0
                   ? {
-                      HomeCubit.get(context).GetMaxKey = null,
-                      HomeCubit.get(context).getMaxKey(20),
                       MagicRouter.navigateTo(
                           AnnualDeliveringCar('تسليم سيارة سنوى'.tr()))
                     }
                   : index == 1
                       ? {
-                          HomeCubit.get(context).GetMaxKey = null,
-                          HomeCubit.get(context).getMaxKey(22),
                           MagicRouter.navigateTo(
                               DailyDeliveringCar('تسليم سيارة يومي'.tr()))
                         }
                       : index == 2
                           ? {
-                              HomeCubit.get(context).GetMaxKey = null,
-                              HomeCubit.get(context).getMaxKey(24),
                               MagicRouter.navigateTo(
                                   AnnualPickupCar('إستلام سيارة سنوي'.tr()))
                             }
                           : {
-                              HomeCubit.get(context).GetMaxKey = null,
-                              HomeCubit.get(context).getMaxKey(23),
                               MagicRouter.navigateTo(
                                   DailyPickupCar('إستلام سيارة يومي'.tr()))
                             };
